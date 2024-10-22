@@ -9940,7 +9940,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 717,
-											"top": 261,
+											"top": 181,
 											"width": 105.78076171875,
 											"height": 13,
 											"text": "«enumeration»"
@@ -9953,7 +9953,7 @@
 											},
 											"font": "Arial;13;1",
 											"left": 717,
-											"top": 276,
+											"top": 196,
 											"width": 105.78076171875,
 											"height": 13,
 											"text": "GameState"
@@ -9967,7 +9967,7 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 96,
-											"top": -144,
+											"top": -304,
 											"width": 111.0205078125,
 											"height": 13,
 											"text": "(from Logical View)"
@@ -9981,14 +9981,14 @@
 											"visible": false,
 											"font": "Arial;13;0",
 											"left": 96,
-											"top": -144,
+											"top": -304,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 712,
-									"top": 256,
+									"top": 176,
 									"width": 115.78076171875,
 									"height": 38,
 									"stereotypeLabel": {
@@ -10016,7 +10016,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 32,
-									"top": -72,
+									"top": -152,
 									"width": 10,
 									"height": 10
 								},
@@ -10032,7 +10032,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 32,
-									"top": -72,
+									"top": -152,
 									"width": 10,
 									"height": 10
 								},
@@ -10048,7 +10048,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 32,
-									"top": -72,
+									"top": -152,
 									"width": 10,
 									"height": 10
 								},
@@ -10064,7 +10064,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 32,
-									"top": -72,
+									"top": -152,
 									"width": 10,
 									"height": 10
 								},
@@ -10089,10 +10089,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 717,
-											"top": 299,
+											"top": 219,
 											"width": 105.78076171875,
 											"height": 13,
-											"text": "Starting",
+											"text": "WaitPlayers",
 											"horizontalAlignment": 0
 										},
 										{
@@ -10106,10 +10106,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 717,
-											"top": 314,
+											"top": 234,
 											"width": 105.78076171875,
 											"height": 13,
-											"text": "Waiting",
+											"text": "PrepareStrategy",
 											"horizontalAlignment": 0
 										},
 										{
@@ -10123,10 +10123,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 717,
-											"top": 329,
+											"top": 249,
 											"width": 105.78076171875,
 											"height": 13,
-											"text": "GameOver",
+											"text": "InitializeGame",
 											"horizontalAlignment": 0
 										},
 										{
@@ -10140,26 +10140,77 @@
 											},
 											"font": "Arial;13;0",
 											"left": 717,
-											"top": 344,
+											"top": 264,
 											"width": 105.78076171875,
 											"height": 13,
-											"text": "Setup",
+											"text": "PlayerInTurn",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAGSsjAhS91cBdg=",
+											"_parent": {
+												"$ref": "AAAAAAGSrPDS1/iANWs="
+											},
+											"model": {
+												"$ref": "AAAAAAGSsjAhQt015Co="
+											},
+											"font": "Arial;13;0",
+											"left": 717,
+											"top": 279,
+											"width": 105.78076171875,
+											"height": 13,
+											"text": "VerifyShoot",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAGSsjBuQeJq8ho=",
+											"_parent": {
+												"$ref": "AAAAAAGSrPDS1/iANWs="
+											},
+											"model": {
+												"$ref": "AAAAAAGSsjBuOOJDBXw="
+											},
+											"font": "Arial;13;0",
+											"left": 717,
+											"top": 294,
+											"width": 105.78076171875,
+											"height": 13,
+											"text": "ChangeTurn",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLEnumerationLiteralView",
+											"_id": "AAAAAAGSsjDL6+ma2Uw=",
+											"_parent": {
+												"$ref": "AAAAAAGSrPDS1/iANWs="
+											},
+											"model": {
+												"$ref": "AAAAAAGSsjDL4OlzLY8="
+											},
+											"font": "Arial;13;0",
+											"left": 717,
+											"top": 309,
+											"width": 105.78076171875,
+											"height": 13,
+											"text": "VerifyPlayerShips",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 712,
-									"top": 294,
+									"top": 214,
 									"width": 115.78076171875,
-									"height": 68
+									"height": 113
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
 							"left": 712,
-							"top": 256,
+							"top": 176,
 							"width": 114.78076171875,
-							"height": 106,
+							"height": 151,
 							"nameCompartment": {
 								"$ref": "AAAAAAGSrPDS1/h3wQg="
 							},
@@ -10203,7 +10254,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 749,
-									"top": 370,
+									"top": 352,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -10224,7 +10275,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 734,
-									"top": 370,
+									"top": 352,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -10245,7 +10296,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 778,
-									"top": 371,
+									"top": 353,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -10331,7 +10382,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 749,
-									"top": 381,
+									"top": 346,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -10351,7 +10402,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 735,
-									"top": 384,
+									"top": 349,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -10371,7 +10422,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 773,
-									"top": 377,
+									"top": 342,
 									"width": 7.22998046875,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -10417,7 +10468,7 @@
 							"tail": {
 								"$ref": "AAAAAAGSO+V2RHQDQ34="
 							},
-							"points": "764:392;764:362",
+							"points": "764:392;764:327",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGSrPb+dkWD4JU="
@@ -46977,7 +47028,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGSrPDS1fh09bc="
 							},
-							"name": "Starting"
+							"name": "WaitPlayers"
 						},
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -46985,7 +47036,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGSrPDS1fh09bc="
 							},
-							"name": "Waiting"
+							"name": "PrepareStrategy"
 						},
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -46993,7 +47044,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGSrPDS1fh09bc="
 							},
-							"name": "GameOver"
+							"name": "InitializeGame"
 						},
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -47001,7 +47052,31 @@
 							"_parent": {
 								"$ref": "AAAAAAGSrPDS1fh09bc="
 							},
-							"name": "Setup"
+							"name": "PlayerInTurn"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAGSsjAhQt015Co=",
+							"_parent": {
+								"$ref": "AAAAAAGSrPDS1fh09bc="
+							},
+							"name": "VerifyShoot"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAGSsjBuOOJDBXw=",
+							"_parent": {
+								"$ref": "AAAAAAGSrPDS1fh09bc="
+							},
+							"name": "ChangeTurn"
+						},
+						{
+							"_type": "UMLEnumerationLiteral",
+							"_id": "AAAAAAGSsjDL4OlzLY8=",
+							"_parent": {
+								"$ref": "AAAAAAGSrPDS1fh09bc="
+							},
+							"name": "VerifyPlayerShips"
 						}
 					]
 				},
