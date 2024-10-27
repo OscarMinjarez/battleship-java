@@ -3,6 +3,7 @@ package org.itson.battleshippresentation.modelView;
 
 import Dominio.Ship;
 import org.itson.battleshippresentation.model.IStrategyObserver;
+import org.itson.battleshippresentation.model.StrategyModel;
 
 
 
@@ -12,7 +13,7 @@ import org.itson.battleshippresentation.model.IStrategyObserver;
  */
 public class StrategyModelView implements IStrategyObserver {
 
-    private StrategyModelView strategyModel;
+    private StrategyModel strategyModel;
     private static StrategyModelView instance;
 
     private StrategyModelView() {
@@ -27,11 +28,11 @@ public class StrategyModelView implements IStrategyObserver {
     }
 
     public void setPlayerReady(boolean value) {
-
+        this.strategyModel.setPlayerReady(value);
     }
 
     public void putShipOnTable(Ship ship) {
-        
+        this.strategyModel.putShipOnTable(ship);
     }
 
     @Override

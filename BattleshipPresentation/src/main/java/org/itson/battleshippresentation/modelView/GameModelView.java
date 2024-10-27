@@ -2,6 +2,7 @@
 package org.itson.battleshippresentation.modelView;
 
 import Dominio.Coordiante;
+import org.itson.battleshippresentation.model.GameModel;
 import org.itson.battleshippresentation.model.IGameObserver;
 
 
@@ -12,7 +13,7 @@ import org.itson.battleshippresentation.model.IGameObserver;
 public class GameModelView implements IGameObserver{
 
     private static GameModelView instance;
-    private GameModelView gameModel;
+    private GameModel gameModel;
 
     private GameModelView() {
 
@@ -31,7 +32,7 @@ public class GameModelView implements IGameObserver{
     }
 
     public void shoot(Coordiante point) {
-
+        this.gameModel.shoot(point);
     }
 
     
