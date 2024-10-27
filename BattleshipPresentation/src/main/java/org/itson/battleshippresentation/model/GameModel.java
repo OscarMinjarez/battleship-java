@@ -1,7 +1,9 @@
-
 package org.itson.battleshippresentation.model;
 
+import Dominio.Coordiante;
 import Dominio.Game;
+import Dominio.Table;
+
 /**
  *
  * @author PabloCeasxr
@@ -13,8 +15,9 @@ public class GameModel {
     private IGameObserver gameOberver;
 
     private GameModel() {
-        
+
     }
+
     public void update() {
     }
 
@@ -26,9 +29,8 @@ public class GameModel {
 
     }
 
-    public void shoot(int coordinate) {
+    public void shoot(Coordiante point) {
 
     }
-
     
 }

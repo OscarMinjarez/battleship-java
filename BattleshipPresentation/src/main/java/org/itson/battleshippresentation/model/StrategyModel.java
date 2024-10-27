@@ -2,6 +2,7 @@
 package org.itson.battleshippresentation.model;
 
 import Dominio.Player;
+import Dominio.Ship;
 
 /**
  *
@@ -19,6 +20,7 @@ public class StrategyModel {
 
     public void update() {
     }
+    
     public static StrategyModel getInstance() {
         if (instance == null) {
             instance = new StrategyModel();
@@ -30,7 +32,7 @@ public class StrategyModel {
 
     }
 
-    public void putShipOnTable(int ship) {
+    public void putShipOnTable(Ship ship) {
 
     }
 
