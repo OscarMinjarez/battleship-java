@@ -4,6 +4,7 @@ package org.itson.battleshippresentation.modelView;
 import Dominio.Player;
 import org.itson.battleshippresentation.model.ConfigModel;
 import org.itson.battleshippresentation.model.IConfigObserver;
+import org.itson.battleshippresentation.view.ConfigView;
 
 /**
  *
@@ -13,6 +14,7 @@ public class ConfigModelView implements IConfigObserver {
 
     private static ConfigModelView instance;
     private ConfigModel configModel;
+    private ConfigView configView;
 
     private ConfigModelView() {
 

@@ -4,6 +4,7 @@ package org.itson.battleshippresentation.modelView;
 import Dominio.Coordiante;
 import org.itson.battleshippresentation.model.GameModel;
 import org.itson.battleshippresentation.model.IGameObserver;
+import org.itson.battleshippresentation.view.GameView;
 
 
 /**
@@ -14,6 +15,7 @@ public class GameModelView implements IGameObserver{
 
     private static GameModelView instance;
     private GameModel gameModel;
+    private GameView gameView;
 
     private GameModelView() {
 
