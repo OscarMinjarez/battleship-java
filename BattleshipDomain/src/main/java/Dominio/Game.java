@@ -20,15 +20,80 @@ public class Game {
         
     }
 
-   
+   /** 
+     * 
+     *  
+     */
     public void swapTurn() {
         
     }
 
-   
+    /** 
+     * 
+     *  
+     */
     private boolean verifyShoot() {
         
               
         return false;
     }
+    
+    /** 
+     * 
+     *  
+     */
+    public GameState getState() {
+        return state;
+    }
+
+    /** 
+     * 
+     *  
+     */
+    public void setState(GameState state) {
+        this.state = state;
+    }
+
+    /** 
+     * 
+     *  
+     */
+    public Player getTurn() {
+        return turn;
+    }
+    
+    /** 
+     * 
+     *  
+     */
+    public void setTurn(Player turn) {
+        this.turn = turn;
+    }
+    
+    /** 
+     * 
+     *  
+     */
+    public Player[] getPlayer() {
+        return player;
+    }
+
+    /** 
+     * 
+     *  
+     */
+    public void setPlayer(Player[] player) {
+        this.player = player;
+    }
+
+    /** 
+     * 
+     *  
+     */
+    @Override
+    public String toString() {
+        return "Game{" + "state=" + state + ", turn=" + turn + ", player=" + player + '}';
+    }
+    
+    
 }

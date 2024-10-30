@@ -24,4 +24,25 @@ public class PlayerColor {
      */
     private Color real;
 
+    public Color getFake() {
+        return fake;
+    }
+
+    public void setFake(Color fake) {
+        this.fake = fake;
+    }
+
+    public Color getReal() {
+        return real;
+    }
+
+    public void setReal(Color real) {
+        this.real = real;
+    }
+
+    @Override
+    public String toString() {
+        return "PlayerColor{" + "fake=" + fake + ", real=" + real + '}';
+    }
+    
 }
