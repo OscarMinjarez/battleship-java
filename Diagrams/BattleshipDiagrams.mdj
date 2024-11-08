@@ -2102,7 +2102,7 @@
 									"parentStyle": true,
 									"left": 879,
 									"top": 141,
-									"width": 108.95361328125,
+									"width": 108,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGR/ovFSwxhlK8="
@@ -2411,7 +2411,7 @@
 									"parentStyle": true,
 									"left": 863.5,
 									"top": 285,
-									"width": 112.60986328125,
+									"width": 112,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGSS3NCQg710WM="
@@ -7282,9 +7282,9 @@
 															"font": "Arial;13;1",
 															"parentStyle": true,
 															"left": 661,
-															"top": 479,
+															"top": 492,
 															"width": 54.44091796875,
-															"height": 26,
+															"height": 13,
 															"text": "Set color",
 															"wordWrap": true
 														},
@@ -7321,9 +7321,9 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"left": 656,
-													"top": 472,
+													"top": 485,
 													"width": 64.44091796875,
-													"height": 38,
+													"height": 25,
 													"stereotypeLabel": {
 														"$ref": "AAAAAAGSjmc+OWN9vhg="
 													},
@@ -11109,9 +11109,9 @@
 															"font": "Arial;13;1",
 															"parentStyle": true,
 															"left": 573,
-															"top": 591,
+															"top": 604,
 															"width": 52.263671875,
-															"height": 39,
+															"height": 26,
 															"text": "Is player founded",
 															"wordWrap": true
 														},
@@ -11148,9 +11148,9 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"left": 568,
-													"top": 584,
+													"top": 597,
 													"width": 62.263671875,
-													"height": 51,
+													"height": 38,
 													"stereotypeLabel": {
 														"$ref": "AAAAAAGSkTnQwHXbXOc="
 													},
@@ -12348,9 +12348,9 @@
 															"font": "Arial;13;1",
 															"parentStyle": true,
 															"left": 677,
-															"top": 719,
+															"top": 732,
 															"width": 46.53173828125,
-															"height": 52,
+															"height": 39,
 															"text": "Add player to game",
 															"wordWrap": true
 														},
@@ -12385,9 +12385,9 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"left": 672,
-													"top": 712,
+													"top": 725,
 													"width": 56.53173828125,
-													"height": 64,
+													"height": 51,
 													"stereotypeLabel": {
 														"$ref": "AAAAAAGSkTsm1DgoMmg="
 													},
@@ -13771,9 +13771,9 @@
 													"font": "Arial;13;0",
 													"parentStyle": false,
 													"left": 271,
-													"top": 351,
+													"top": 358,
 													"width": 72,
-													"height": 52,
+													"height": 39,
 													"alpha": -2.1775239487433007,
 													"distance": 55.78530272392541,
 													"hostEdge": {
@@ -17267,9 +17267,9 @@
 													"font": "Arial;13;0",
 													"parentStyle": false,
 													"left": 450,
-													"top": 184,
+													"top": 190,
 													"width": 53,
-													"height": 65,
+													"height": 52,
 													"alpha": 1.5707960703846402,
 													"distance": 39,
 													"hostEdge": {
@@ -20730,9 +20730,9 @@
 															"font": "Arial;13;1",
 															"parentStyle": true,
 															"left": 837,
-															"top": 516,
+															"top": 519,
 															"width": 47,
-															"height": 52,
+															"height": 39,
 															"text": "Set ship on the table",
 															"wordWrap": true
 														},
@@ -20769,9 +20769,9 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"left": 832,
-													"top": 509,
+													"top": 512,
 													"width": 57,
-													"height": 64,
+													"height": 51,
 													"stereotypeLabel": {
 														"$ref": "AAAAAAGSkiLSXo1lYrI="
 													},
@@ -46297,9 +46297,9 @@
 											"font": "Arial;13;0",
 											"parentStyle": false,
 											"left": 552,
-											"top": 190,
+											"top": 197,
 											"width": 70,
-											"height": 26,
+											"height": 13,
 											"alpha": 1.5707959267948965,
 											"distance": 25,
 											"hostEdge": {
@@ -76357,9 +76357,9 @@
 																	},
 																	"font": "Arial;13;0",
 																	"parentStyle": true,
-																	"left": 288.72998046875,
+																	"left": 286.55908203125,
 																	"top": 13,
-																	"width": 110.576171875,
+																	"width": 96.3828125,
 																	"height": 13,
 																	"text": "Strategy Sequence"
 																},
@@ -76373,7 +76373,7 @@
 																	"parentStyle": true,
 																	"left": 269,
 																	"top": 13,
-																	"width": 13.72998046875,
+																	"width": 11.55908203125,
 																	"height": 13,
 																	"text": "sd"
 																}
@@ -76683,7 +76683,7 @@
 																			"top": 47,
 																			"width": 137.90234375,
 																			"height": 13,
-																			"text": ": StrategyModelView"
+																			"text": ": StrategyViewModel"
 																		},
 																		{
 																			"_type": "LabelView",
@@ -78109,9 +78109,9 @@
 																	},
 																	"font": "Arial;13;0",
 																	"parentStyle": true,
-																	"left": 184.72998046875,
+																	"left": 182.55908203125,
 																	"top": 13,
-																	"width": 97.5634765625,
+																	"width": 84.10009765625,
 																	"height": 13,
 																	"text": "Game Sequence"
 																},
@@ -78125,7 +78125,7 @@
 																	"parentStyle": true,
 																	"left": 165,
 																	"top": 13,
-																	"width": 13.72998046875,
+																	"width": 11.55908203125,
 																	"height": 13,
 																	"text": "sd"
 																}
@@ -78310,7 +78310,7 @@
 																			"top": 47,
 																			"width": 122.01416015625,
 																			"height": 13,
-																			"text": ": GameModelView"
+																			"text": ": GameViewModel"
 																		},
 																		{
 																			"_type": "LabelView",
@@ -79357,9 +79357,9 @@
 																	},
 																	"font": "Arial;13;0",
 																	"parentStyle": true,
-																	"left": 205.07177734375,
+																	"left": 203.61181640625,
 																	"top": 261,
-																	"width": 31.8017578125,
+																	"width": 28.1708984375,
 																	"height": 13,
 																	"text": "shoot"
 																},
@@ -79373,7 +79373,7 @@
 																	"parentStyle": true,
 																	"left": 181,
 																	"top": 261,
-																	"width": 18.07177734375,
+																	"width": 16.61181640625,
 																	"height": 13,
 																	"text": "opt"
 																},
@@ -79407,7 +79407,7 @@
 																					"parentStyle": true,
 																					"left": 196,
 																					"top": 294,
-																					"width": 75.16259765625,
+																					"width": 71.7158203125,
 																					"height": 13,
 																					"text": "[shoot == hit]"
 																				}
@@ -79442,7 +79442,7 @@
 																					"parentStyle": true,
 																					"left": 196,
 																					"top": 399,
-																					"width": 92.5107421875,
+																					"width": 87.5849609375,
 																					"height": 13,
 																					"text": "[shoot == failed]"
 																				}
@@ -79619,9 +79619,9 @@
 																	},
 																	"font": "Arial;13;0",
 																	"parentStyle": false,
-																	"left": 627,
+																	"left": 565,
 																	"top": 331,
-																	"width": 93.9453125,
+																	"width": 216.2646484375,
 																	"height": 13,
 																	"alpha": 1.5707963267948966,
 																	"distance": 10,
@@ -79629,7 +79629,7 @@
 																		"$ref": "AAAAAAGS27uXj+j5eQA="
 																	},
 																	"edgePosition": 1,
-																	"text": "7 : update():void"
+																	"text": "7 : update(gameStatus: GameStatus):void"
 																},
 																{
 																	"_type": "EdgeLabelView",
@@ -79967,9 +79967,9 @@
 																	},
 																	"font": "Arial;13;0",
 																	"parentStyle": false,
-																	"left": 623,
+																	"left": 562,
 																	"top": 422,
-																	"width": 101.17529296875,
+																	"width": 222.7646484375,
 																	"height": 13,
 																	"alpha": 1.5707963267948966,
 																	"distance": 10,
@@ -79977,7 +79977,7 @@
 																		"$ref": "AAAAAAGS28OHR/eKGXs="
 																	},
 																	"edgePosition": 1,
-																	"text": "10 : update():void"
+																	"text": "10 : update(gameStatus: GameStatus):void"
 																},
 																{
 																	"_type": "EdgeLabelView",
@@ -80570,9 +80570,9 @@
 																	},
 																	"font": "Arial;13;0",
 																	"parentStyle": true,
-																	"left": 144.72998046875,
+																	"left": 142.55908203125,
 																	"top": 13,
-																	"width": 139.48974609375,
+																	"width": 125.99462890625,
 																	"height": 13,
 																	"text": "Configuration Sequence"
 																},
@@ -80586,7 +80586,7 @@
 																	"parentStyle": true,
 																	"left": 125,
 																	"top": 13,
-																	"width": 13.72998046875,
+																	"width": 11.55908203125,
 																	"height": 13,
 																	"text": "sd"
 																}
@@ -80895,7 +80895,7 @@
 																			"top": 47,
 																			"width": 134,
 																			"height": 13,
-																			"text": ": ConfigModelView"
+																			"text": ": ConfigViewModel"
 																		},
 																		{
 																			"_type": "LabelView",
@@ -81463,9 +81463,9 @@
 																	},
 																	"font": "Arial;13;0",
 																	"parentStyle": true,
-																	"left": 189.07177734375,
+																	"left": 187.61181640625,
 																	"top": 285,
-																	"width": 54.92626953125,
+																	"width": 52.00634765625,
 																	"height": 13,
 																	"text": "Condition"
 																},
@@ -81479,7 +81479,7 @@
 																	"parentStyle": true,
 																	"left": 165,
 																	"top": 285,
-																	"width": 18.07177734375,
+																	"width": 16.61181640625,
 																	"height": 13,
 																	"text": "opt"
 																},
@@ -81513,7 +81513,7 @@
 																					"parentStyle": true,
 																					"left": 180,
 																					"top": 318,
-																					"width": 126.9404296875,
+																					"width": 122.255859375,
 																					"height": 13,
 																					"text": "[isValidConfig == true]"
 																				}
@@ -81548,7 +81548,7 @@
 																					"parentStyle": true,
 																					"left": 180,
 																					"top": 431,
-																					"width": 131.99951171875,
+																					"width": 126.5849609375,
 																					"height": 13,
 																					"text": "[isValidConfig == false]"
 																				}
@@ -83404,24 +83404,6 @@
 													"height": 13,
 													"text": "-peerServer: PeerServerModel",
 													"horizontalAlignment": 0
-												},
-												{
-													"_type": "UMLAttributeView",
-													"_id": "AAAAAAGTCMDn3hvQVKE=",
-													"_parent": {
-														"$ref": "AAAAAAGTCLN0EhDKy2Q="
-													},
-													"model": {
-														"$ref": "AAAAAAGTCMDn2RvNLHU="
-													},
-													"font": "Arial;13;0",
-													"parentStyle": true,
-													"left": 341,
-													"top": 485,
-													"width": 178.01708984375,
-													"height": 13,
-													"text": "-peerClient: PeerClientView",
-													"horizontalAlignment": 0
 												}
 											],
 											"font": "Arial;13;0",
@@ -83429,7 +83411,7 @@
 											"left": 336,
 											"top": 465,
 											"width": 188.01708984375,
-											"height": 38
+											"height": 23
 										},
 										{
 											"_type": "UMLOperationCompartmentView",
@@ -83453,7 +83435,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"left": 341,
-													"top": 508,
+													"top": 493,
 													"width": 178.01708984375,
 													"height": 13,
 													"text": "+initialize(): void",
@@ -83471,7 +83453,7 @@
 													"font": "Arial;13;0",
 													"parentStyle": true,
 													"left": 341,
-													"top": 523,
+													"top": 508,
 													"width": 178.01708984375,
 													"height": 13,
 													"text": "+connect(): void",
@@ -83481,7 +83463,7 @@
 											"font": "Arial;13;0",
 											"parentStyle": true,
 											"left": 336,
-											"top": 503,
+											"top": 488,
 											"width": 188.01708984375,
 											"height": 38
 										},
@@ -86155,18 +86137,6 @@
 									"visibility": "private",
 									"type": {
 										"$ref": "AAAAAAGTCLmvkhEoshI="
-									}
-								},
-								{
-									"_type": "UMLAttribute",
-									"_id": "AAAAAAGTCMDn2RvNLHU=",
-									"_parent": {
-										"$ref": "AAAAAAGTCLN0ERDCaFY="
-									},
-									"name": "peerClient",
-									"visibility": "private",
-									"type": {
-										"$ref": "AAAAAAGTCLnKyRFTIX0="
 									}
 								}
 							],
@@ -95026,7 +94996,7 @@
 									"font": "Arial;12;0",
 									"parentStyle": false,
 									"containerExtending": true,
-									"left": 343,
+									"left": 347,
 									"top": 634,
 									"height": 12,
 									"alpha": 1.5707963267948966,
@@ -95049,7 +95019,7 @@
 									"font": "Arial;12;0",
 									"parentStyle": false,
 									"containerExtending": true,
-									"left": 343,
+									"left": 347,
 									"top": 619,
 									"height": 12,
 									"alpha": 1.5707963267948966,
@@ -95072,7 +95042,7 @@
 									"font": "Arial;12;0",
 									"parentStyle": false,
 									"containerExtending": true,
-									"left": 343,
+									"left": 347,
 									"top": 664,
 									"height": 12,
 									"alpha": -1.5707963267948966,
