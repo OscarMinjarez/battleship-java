@@ -1,10 +1,10 @@
 
-package org.itson.battleshippresentation.modelView;
+package org.itson.presentation.strategy;
 
 import Dominio.Ship;
-import org.itson.battleshippresentation.model.IStrategyObserver;
-import org.itson.battleshippresentation.model.StrategyModel;
-import org.itson.battleshippresentation.view.StrategyView;
+import org.itson.presentation.strategy.IStrategyObserver;
+import org.itson.presentation.strategy.StrategyModel;
+import org.itson.presentation.strategy.StrategyView;
 
 
 
