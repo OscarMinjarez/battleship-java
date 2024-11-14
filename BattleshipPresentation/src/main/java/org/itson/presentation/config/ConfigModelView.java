@@ -1,10 +1,9 @@
 
-package org.itson.battleshippresentation.modelView;
+package org.itson.presentation.config;
 
 import Dominio.Player;
-import org.itson.battleshippresentation.model.ConfigModel;
-import org.itson.battleshippresentation.model.IConfigObserver;
-import org.itson.battleshippresentation.view.FrmBattleship;
+import org.itson.presentation.config.ConfigModel;
+import org.itson.presentation.config.IConfigObserver;
 
 /**
  *

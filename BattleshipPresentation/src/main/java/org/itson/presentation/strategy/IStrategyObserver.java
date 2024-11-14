@@ -1,5 +1,5 @@
 
-package org.itson.battleshippresentation.model;
+package org.itson.presentation.strategy;
 /**
  *
  * @author PabloCeasxr

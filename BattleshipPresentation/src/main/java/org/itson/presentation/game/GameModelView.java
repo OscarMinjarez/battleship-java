@@ -1,10 +1,8 @@
 
-package org.itson.battleshippresentation.modelView;
+package org.itson.presentation.game;
 
 import Dominio.Coordiante;
-import org.itson.battleshippresentation.model.GameModel;
-import org.itson.battleshippresentation.model.IGameObserver;
-import org.itson.battleshippresentation.view.GameView;
+import org.itson.presentation.game.GameView;
 
 
 /**

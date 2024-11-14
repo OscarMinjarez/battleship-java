@@ -1,4 +1,4 @@
-package org.itson.battleshippresentation;
+package org.itson.presentation;
 
 public class BattleshipPresentation {
 

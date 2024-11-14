@@ -1,4 +1,4 @@
-package org.itson.battleshippresentation.view;
+package org.itson.presentation.strategy;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import org.itson.battleshippresentation.modelView.StrategyModelView;
+import org.itson.presentation.strategy.StrategyModelView;
 
 /**
  *
@@ -143,7 +143,6 @@ public class StrategyView extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setAutoRequestFocus(false);
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jLabel1.setText("Strategy screen");
         getContentPane().add(jLabel1, java.awt.BorderLayout.PAGE_START);

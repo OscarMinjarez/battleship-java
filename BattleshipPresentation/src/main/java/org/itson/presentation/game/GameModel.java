@@ -1,4 +1,4 @@
-package org.itson.battleshippresentation.model;
+package org.itson.presentation.game;
 
 import Dominio.Coordiante;
 import Dominio.Game;

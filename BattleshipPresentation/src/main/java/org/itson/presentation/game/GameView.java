@@ -1,9 +1,8 @@
 
-package org.itson.battleshippresentation.view;
+package org.itson.presentation.game;
 
 
 import javax.swing.JLabel;
-import org.itson.battleshippresentation.modelView.GameModelView;
 
 /**
  *

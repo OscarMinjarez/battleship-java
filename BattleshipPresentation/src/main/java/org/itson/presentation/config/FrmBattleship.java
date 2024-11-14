@@ -1,7 +1,7 @@
 
-package org.itson.battleshippresentation.view;
+package org.itson.presentation.config;
 
-import org.itson.battleshippresentation.modelView.ConfigModelView;
+import org.itson.presentation.config.ConfigModelView;
 
 
 /**

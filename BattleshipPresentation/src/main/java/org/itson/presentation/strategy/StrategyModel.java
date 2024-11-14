@@ -1,5 +1,5 @@
 
-package org.itson.battleshippresentation.model;
+package org.itson.presentation.strategy;
 
 import Dominio.Player;
 import Dominio.Ship;
