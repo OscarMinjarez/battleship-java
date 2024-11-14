@@ -1,8 +1,8 @@
 
 package org.itson.presentation.strategy;
 
-import Dominio.Player;
-import Dominio.Ship;
+import domain.Player;
+import domain.Ship;
 
 /**
  *

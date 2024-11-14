@@ -1,7 +1,7 @@
 
 package org.itson.presentation.config;
 
-import Dominio.Player;
+import domain.Player;
 
 /**
  *

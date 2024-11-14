@@ -1,9 +1,8 @@
-package Dominio;
+package domain;
 
-/**
- * 
- */
-public enum GameState {
+import java.io.Serializable;
+
+public enum GameState implements Serializable {
     WaitPlayers,
     PrepareStrategy,
     InitializeGame,

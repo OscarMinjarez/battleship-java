@@ -1,8 +1,5 @@
-package Dominio;
+package domain;
 
-/**
- * 
- */
 public enum ShipState {
     Sunken,
     Broken,
