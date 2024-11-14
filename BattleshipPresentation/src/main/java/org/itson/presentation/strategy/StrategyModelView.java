@@ -1,7 +1,7 @@
 
 package org.itson.presentation.strategy;
 
-import Dominio.Ship;
+import domain.Ship;
 import org.itson.presentation.strategy.IStrategyObserver;
 import org.itson.presentation.strategy.StrategyModel;
 import org.itson.presentation.strategy.StrategyView;

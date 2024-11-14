@@ -1,8 +1,8 @@
 package org.itson.presentation.game;
 
-import Dominio.Coordiante;
-import Dominio.Game;
-import Dominio.Table;
+import domain.Coordiante;
+import domain.Game;
+import domain.Table;
 
 /**
  *

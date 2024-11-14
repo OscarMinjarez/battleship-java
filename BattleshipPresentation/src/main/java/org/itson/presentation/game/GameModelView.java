@@ -1,7 +1,7 @@
 
 package org.itson.presentation.game;
 
-import Dominio.Coordiante;
+import domain.Coordiante;
 import org.itson.presentation.game.GameView;
 
 

@@ -1,14 +1,10 @@
 
 package org.itson.presentation.config;
 
-import Dominio.Player;
+import domain.Player;
 import org.itson.presentation.config.ConfigModel;
 import org.itson.presentation.config.IConfigObserver;
 
-/**
- *
- * @author PabloCeasxr
- */
 public class ConfigModelView implements IConfigObserver {
 
     private static ConfigModelView instance;
@@ -20,11 +16,10 @@ public class ConfigModelView implements IConfigObserver {
     }
 
     public static ConfigModelView getInstance() {
-        if (instance == null) {
-            instance = new ConfigModelView();
+        if (ConfigModelView.instance == null) {
+            ConfigModelView.instance = new ConfigModelView();
         }
-
-        return instance;
+        return ConfigModelView.instance;
     }
 
     @Override
@@ -34,5 +29,4 @@ public class ConfigModelView implements IConfigObserver {
     public void saveConfig(Player player) {
         this.configModel.saveConfig(player);
     }
-
 }
