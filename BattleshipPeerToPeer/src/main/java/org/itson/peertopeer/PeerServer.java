@@ -19,11 +19,11 @@ public class PeerServer implements Runnable {
     public PeerServer(int port) throws IOException {
         this.clients = new ArrayList<>();
         this.serverSocket = new ServerSocket(port);
-        this.thread = new Thread("server");
+        this.thread = new Thread(this, "server");
     }
     
     public void runServer() {
-        this.run();
+        this.thread.start();
     }
     
     public void send(Object object) {
@@ -36,24 +36,46 @@ public class PeerServer implements Runnable {
 
     @Override
     public void run() {
-        this.thread.start();
         while (true) {
-            try (Socket client = this.serverSocket.accept()) {
-                System.out.println("Client connected " + client.getLocalPort());
-                this.clients.add(client);
-                for (Socket c : this.clients) {
-                    ObjectInputStream input = new ObjectInputStream(c.getInputStream());
-                    ObjectOutputStream output = new ObjectOutputStream(c.getOutputStream());
-                    try {
-                        Object object = input.readObject();
-                        output.writeObject(object);
-                        this.send(object);
-                    } catch (ClassNotFoundException e) {
-                        System.out.println(e.getMessage());
+            try {
+                Socket client = this.serverSocket.accept();
+                synchronized (this.clients) {
+                    this.clients.add(client);
+                }
+                System.out.println("Client connected " + client.getPort());
+                new Thread(() -> this.handleClient(client)).start();
+            } catch (IOException e) {
+                System.out.println("Connection error: " + e.getMessage());
+            }
+        }
+    }
+
+    private void handleClient(Socket client) {
+        try (
+            ObjectInputStream input = new ObjectInputStream(client.getInputStream());
+            ObjectOutputStream output = new ObjectOutputStream(client.getOutputStream());
+        ) {
+            while (true) {
+                Object object = input.readObject();
+                synchronized (this.clients) {
+                    for (Socket c : this.clients) {
+                        if (!c.equals(client)) {
+                            try {
+                                ObjectOutputStream otherOutput = new ObjectOutputStream(c.getOutputStream());
+                                otherOutput.writeObject(object);
+                            } catch (IOException e) {
+                                System.out.println("Error sending to client: " + e.getMessage());
+                            }
+                        }
                     }
                 }
-            } catch (IOException e) {
-                System.out.println("Connection error..." + e.getMessage());
+                this.send(object);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error handling client: " + e.getMessage());
+        } finally {
+            synchronized (clients) {
+                clients.remove(client);
             }
         }
     }

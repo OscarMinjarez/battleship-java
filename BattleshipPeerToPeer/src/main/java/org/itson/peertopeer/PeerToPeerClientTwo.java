@@ -9,17 +9,18 @@ import domain.GameStatus;
 import domain.History;
 import domain.Player;
 
-public class PeerToPeer {
+public class PeerToPeerClientTwo {
 
     public static void main(String[] args) {
         try {
-            PeerClient client = new PeerClient(5000);
+            PeerClient client = new PeerClient(5001);
+            client.runServer();
+            client.connect("192.168.100.15", 5000);
             GameStatus gameStatus = new GameStatus(
-                new History(new Date(), "This is a message", new Player("Oscar")),
+                new History(new Date(), "This is an another message", new Player("Oscar")),
                 new Game()
             );
             client.writeObject(gameStatus);
-            client.runServer();
         } catch (UnknownHostException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {
