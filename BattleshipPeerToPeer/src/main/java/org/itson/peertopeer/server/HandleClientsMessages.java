@@ -6,10 +6,13 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
 
+import org.itson.peertopeer.IServerObserver;
+
 public class HandleClientsMessages implements Runnable {
 
     private Thread thread;
     private List<Socket> sockets;
+    private IServerObserver serverObserver;
 
     public HandleClientsMessages(List<Socket> sockets) {
         this.sockets = sockets;
@@ -29,12 +32,16 @@ public class HandleClientsMessages implements Runnable {
                         ObjectOutputStream output = new ObjectOutputStream(client.getOutputStream());
                         ObjectInputStream input = new ObjectInputStream(client.getInputStream());
                         Object object = input.readObject();
-                        System.out.println(object);
+                        this.serverObserver.send(object);
                     } catch (IOException | ClassNotFoundException e) {
                         System.out.println(e.getMessage());
                     }
                 }
             }
         }
+    }
+
+    public void setServerObserver(IServerObserver serverObserver) {
+        this.serverObserver = serverObserver;
     }
 }

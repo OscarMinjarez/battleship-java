@@ -28,6 +28,8 @@ public class PeerServer implements Runnable {
 
     public void setServerObserver(IServerObserver serverObserver) {
         this.serverObserver = serverObserver;
+        this.handleSocketsConnection.setServerObserver(serverObserver);
+        this.handleClientsMessages.setServerObserver(serverObserver);
     }
 
     @Override

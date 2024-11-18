@@ -19,6 +19,8 @@ public class PeerClient implements IServerObserver, Runnable {
     private PeerNode peerNode;
     private Thread thread;
     private InetAddress ip;
+
+    private HandleMessagesFromClient handleMessagesFromClient;
     
     public PeerClient(int port) throws UnknownHostException, IOException {
         this.peerNode = new PeerNode(port);
@@ -27,6 +29,7 @@ public class PeerClient implements IServerObserver, Runnable {
         System.out.println("Initialized PeerClient in: " + this.ip + "; Port: " + port);
         this.socket = new Socket(this.ip, port);
         this.thread = new Thread(this, "client");
+        this.handleMessagesFromClient = new HandleMessagesFromClient(this.socket);
     }
 
     public void runServer() {
@@ -42,9 +45,9 @@ public class PeerClient implements IServerObserver, Runnable {
                 if (this.output == null) {
                     this.output = new ObjectOutputStream(this.socket.getOutputStream());
                 }
-                if (this.input == null) {
-                    this.input = new ObjectInputStream(this.socket.getInputStream());
-                }
+                // if (this.input == null) {
+                //     this.input = new ObjectInputStream(this.socket.getInputStream());
+                // }
                 System.out.println("Connected to server at " + host + ":" + port);
             } catch (IOException e) {
                 System.out.println("Error connecting to server: " + e.getMessage());
@@ -66,6 +69,7 @@ public class PeerClient implements IServerObserver, Runnable {
 
     @Override
     public void run() {
+        this.handleMessagesFromClient.start();
         this.peerNode.runServer();
     }
 }

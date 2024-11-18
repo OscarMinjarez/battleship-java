@@ -6,11 +6,14 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.itson.peertopeer.IServerObserver;
+
 public class HandleSocketsConnection implements Runnable {
     
     private Thread thread;
     private ServerSocket serverSocket;
     private List<Socket> sockets;
+    private IServerObserver serverObserver;
 
     public HandleSocketsConnection(ServerSocket serverSocket) {
         this.sockets = new ArrayList<>();
@@ -30,7 +33,7 @@ public class HandleSocketsConnection implements Runnable {
                 synchronized (this.sockets) {
                     this.sockets.add(client);
                 }
-                System.out.println("Client connected from port: " + client.getPort());
+                this.serverObserver.send(client);
             } catch (IOException e) {
                 System.out.println("An error ocurred in ");
             }
@@ -39,5 +42,9 @@ public class HandleSocketsConnection implements Runnable {
 
     public List<Socket> getClientSockets() {
         return this.sockets;
+    }
+
+    public void setServerObserver(IServerObserver serverObserver) {
+        this.serverObserver = serverObserver;
     }
 }
