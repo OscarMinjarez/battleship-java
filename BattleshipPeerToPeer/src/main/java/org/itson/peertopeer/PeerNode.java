@@ -2,6 +2,8 @@ package org.itson.peertopeer;
 
 import java.io.IOException;
 
+import org.itson.peertopeer.server.PeerServer;
+
 public class PeerNode {
     
     private PeerServer peerServer;

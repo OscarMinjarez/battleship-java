@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Date;
 
+import org.itson.peertopeer.client.PeerClient;
+
 import domain.Game;
 import domain.GameStatus;
 import domain.History;
@@ -18,6 +20,7 @@ public class PeerToPeerClientOne {
                 new History(new Date(), "This is a message", new Player("Oscar")),
                 new Game()
             );
+            client.runServer();
             client.writeObject(gameStatus);
         } catch (UnknownHostException e) {
             System.out.println(e.getMessage());
