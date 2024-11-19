@@ -8,10 +8,13 @@ public class HandleMessagesFromClient implements Runnable {
 
     private Socket socket;
     private Thread thread;
+    
+    private ObjectInputStream input;
 
-    public HandleMessagesFromClient(Socket socket) {
+    public HandleMessagesFromClient(Socket socket) throws IOException {
         this.socket = socket;
         this.thread = new Thread(this, "Message from client handler");
+        this.input = new ObjectInputStream(this.socket.getInputStream());
     }
 
     public void start() {
@@ -22,8 +25,7 @@ public class HandleMessagesFromClient implements Runnable {
     public void run() {
         while (true) {
             try {
-                ObjectInputStream input = new ObjectInputStream(this.socket.getInputStream());
-                Object object = input.readObject();
+                Object object = this.input.readObject();
                 System.out.println("Message from server: " + object);
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println(e);

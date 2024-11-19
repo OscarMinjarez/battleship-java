@@ -35,7 +35,7 @@ public class HandleSocketsConnection implements Runnable {
                 System.out.println("Client connected...");
                 this.serverObserver.send(client);
             } catch (IOException e) {
-                System.out.println("An error ocurred in ");
+                System.out.println("An error ocurred in " + e.getMessage());
             }
         }
     }
