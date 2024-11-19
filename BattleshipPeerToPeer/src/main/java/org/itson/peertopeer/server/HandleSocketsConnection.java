@@ -12,11 +12,11 @@ public class HandleSocketsConnection implements Runnable {
     
     private Thread thread;
     private ServerSocket serverSocket;
-    private List<Socket> sockets;
+    private List<ClientHandler> clients;
     private IServerObserver serverObserver;
 
-    public HandleSocketsConnection(ServerSocket serverSocket) {
-        this.sockets = new ArrayList<>();
+    public HandleSocketsConnection(ServerSocket serverSocket, List<ClientHandler> clients) {
+        this.clients = clients;
         this.thread = new Thread(this, "Sockets connection handler thread");
         this.serverSocket = serverSocket;
     }
@@ -29,10 +29,10 @@ public class HandleSocketsConnection implements Runnable {
     public void run() {
         while (true) {
             try {
-                Socket client = this.serverSocket.accept();
-                synchronized (this.sockets) {
-                    this.sockets.add(client);
-                }
+                Socket socket = this.serverSocket.accept();
+                ClientHandler client = new ClientHandler(socket);
+                this.clients.add(client);
+                System.out.println("Client connected...");
                 this.serverObserver.send(client);
             } catch (IOException e) {
                 System.out.println("An error ocurred in ");
@@ -40,8 +40,8 @@ public class HandleSocketsConnection implements Runnable {
         }
     }
 
-    public List<Socket> getClientSockets() {
-        return this.sockets;
+    public List<ClientHandler> getClientSockets() {
+        return this.clients;
     }
 
     public void setServerObserver(IServerObserver serverObserver) {

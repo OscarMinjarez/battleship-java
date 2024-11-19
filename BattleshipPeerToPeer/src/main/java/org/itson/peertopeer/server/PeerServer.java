@@ -2,6 +2,7 @@ package org.itson.peertopeer.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.itson.peertopeer.IServerObserver;
 
@@ -13,8 +14,9 @@ public class PeerServer implements Runnable {
     private IServerObserver serverObserver;
     
     public PeerServer(int port) throws IOException {
-        this.handleSocketsConnection = new HandleSocketsConnection(new ServerSocket(port));
-        this.handleClientsMessages = new HandleClientsMessages(this.handleSocketsConnection.getClientSockets());
+        CopyOnWriteArrayList<ClientHandler> clients = new CopyOnWriteArrayList<>();
+        this.handleSocketsConnection = new HandleSocketsConnection(new ServerSocket(port), clients);
+        this.handleClientsMessages = new HandleClientsMessages(clients);
         this.thread = new Thread(this, "Peer server thread");
     }
     

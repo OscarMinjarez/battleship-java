@@ -11,11 +11,11 @@ import org.itson.peertopeer.IServerObserver;
 public class HandleClientsMessages implements Runnable {
 
     private Thread thread;
-    private List<Socket> sockets;
+    private List<ClientHandler> clients;
     private IServerObserver serverObserver;
 
-    public HandleClientsMessages(List<Socket> sockets) {
-        this.sockets = sockets;
+    public HandleClientsMessages(List<ClientHandler> clients) {
+        this.clients = clients;
         this.thread = new  Thread(this, "Clients messages handler thread");
     }
 
@@ -26,12 +26,10 @@ public class HandleClientsMessages implements Runnable {
     @Override
     public void run() {
         while (true) {
-            synchronized (this.sockets) {
-                for (Socket client : this.sockets) {
+            synchronized (this.clients) {
+                for (ClientHandler client : this.clients) {
                     try {
-                        ObjectOutputStream output = new ObjectOutputStream(client.getOutputStream());
-                        ObjectInputStream input = new ObjectInputStream(client.getInputStream());
-                        Object object = input.readObject();
+                        Object object = client.readObject();
                         this.serverObserver.send(object);
                     } catch (IOException | ClassNotFoundException e) {
                         System.out.println(e.getMessage());

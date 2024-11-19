@@ -39,15 +39,16 @@ public class PeerClient implements IServerObserver, Runnable {
     public void connect(String host, int port) {
         new Thread(() -> {
             try {
-                if (this.socket == null || this.socket.isClosed()) {
-                    this.socket = new Socket(host, port);
-                }
+                // if (this.socket == null || this.socket.isClosed()) {
+                //     this.socket = new Socket(host, port);
+                // }
                 if (this.output == null) {
                     this.output = new ObjectOutputStream(this.socket.getOutputStream());
                 }
                 // if (this.input == null) {
                 //     this.input = new ObjectInputStream(this.socket.getInputStream());
                 // }
+                this.socket = new Socket(host, port);
                 System.out.println("Connected to server at " + host + ":" + port);
             } catch (IOException e) {
                 System.out.println("Error connecting to server: " + e.getMessage());
