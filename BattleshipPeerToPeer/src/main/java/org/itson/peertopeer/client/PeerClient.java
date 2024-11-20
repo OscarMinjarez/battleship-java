@@ -10,14 +10,13 @@ import java.net.UnknownHostException;
 import org.itson.peertopeer.IServerObserver;
 import org.itson.peertopeer.PeerNode;
 
-public class PeerClient implements IServerObserver, Runnable {
+public class PeerClient implements IServerObserver {
     
     private Socket socket;
     private ObjectInputStream input;
     private ObjectOutputStream output;
 
     private PeerNode peerNode;
-    private Thread thread;
     private InetAddress ip;
 
     private HandleMessagesFromClient handleMessagesFromClient;
@@ -28,33 +27,24 @@ public class PeerClient implements IServerObserver, Runnable {
         this.ip = InetAddress.getLocalHost();
         System.out.println("Initialized PeerClient in: " + this.ip + "; Port: " + port);
         this.socket = new Socket(this.ip, port);
-        this.thread = new Thread(this, "client");
         this.handleMessagesFromClient = new HandleMessagesFromClient(this.socket);
     }
 
-    public void runServer() {
-        this.thread.start();
+    public PeerClient(String host, int port) throws IOException {
+        this.connect(host, port);
     }
 
-    public void connect(String host, int port) {
-        new Thread(() -> {
-            try {
-                // if (this.socket == null || this.socket.isClosed()) {
-                //     this.socket = new Socket(host, port);
-                // }
-                if (this.output == null) {
-                    this.output = new ObjectOutputStream(this.socket.getOutputStream());
-                }
-                // if (this.input == null) {
-                //     this.input = new ObjectInputStream(this.socket.getInputStream());
-                // }
-                this.socket = new Socket(host, port);
-                System.out.println("Connected to server at " + host + ":" + port);
-            } catch (IOException e) {
-                System.out.println("Error connecting to server: " + e.getMessage());
-            }
-        }).start();
-    }    
+    public void runServer() {
+        this.handleMessagesFromClient.start();
+        this.peerNode.runServer();
+    }
+
+    private void connect(String host, int port) throws IOException {
+        this.socket = new Socket(host, port);
+        System.out.println("Initialized PeerClient in: " + this.ip + "; Port: " + port);
+        this.handleMessagesFromClient = new HandleMessagesFromClient(this.socket);
+        this.handleMessagesFromClient.start();
+    }
 
     @Override
     public void send(Object object) {
@@ -62,15 +52,6 @@ public class PeerClient implements IServerObserver, Runnable {
     }
 
     public void writeObject(Object object) throws IOException {
-        if (this.output == null) {
-            this.output = new ObjectOutputStream(this.socket.getOutputStream());
-        }
-        this.output.writeObject(object);
-    }
-
-    @Override
-    public void run() {
-        this.handleMessagesFromClient.start();
-        this.peerNode.runServer();
+        this.handleMessagesFromClient.sendMessages(object);
     }
 }

@@ -15,8 +15,7 @@ public class PeerToPeerClientTwo {
 
     public static void main(String[] args) {
         try {
-            PeerClient client = new PeerClient(5001);
-            client.connect("10.202.109.131", 5000);
+            PeerClient client = new PeerClient("192.168.100.15", 5000);
             GameStatus gameStatus = new GameStatus(
                 new History(new Date(), "This is an another message", new Player("Oscar")),
                 new Game()

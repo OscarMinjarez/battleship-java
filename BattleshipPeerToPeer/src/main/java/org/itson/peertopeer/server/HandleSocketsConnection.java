@@ -33,7 +33,7 @@ public class HandleSocketsConnection implements Runnable {
                 ClientHandler client = new ClientHandler(socket);
                 this.clients.add(client);
                 System.out.println("Client connected...");
-                this.serverObserver.send(client);
+                this.serverObserver.send(client.toString());
             } catch (IOException e) {
                 System.out.println("An error ocurred in " + e.getMessage());
             }
