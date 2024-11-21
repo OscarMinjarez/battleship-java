@@ -15,7 +15,7 @@ public class BattleshipPeerToPeerOne {
             BattleshipPeerNode node = new BattleshipPeerNode();
             node.run(5000);
             Thread.sleep(2_000);
-            node.connect("10.202.109.131", 5000);
+            node.connect("localhost", 5000);
             Thread.sleep(10_000);
             GameStatus gameStatus = new GameStatus(
                 new History(new Date(), "This is a message", new Player("Oscar")),

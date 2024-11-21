@@ -6,11 +6,15 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
+import org.itson.peertopeer.IServerObserver;
+
 public class BattleshipPeerClient implements AutoCloseable {
     
     private Socket socket;
     private ObjectOutputStream output;
     private ObjectInputStream input;
+
+    private IServerObserver serverObserver;
 
     public BattleshipPeerClient(int port) throws IOException {
         InetAddress ip = InetAddress.getLocalHost();
@@ -29,6 +33,10 @@ public class BattleshipPeerClient implements AutoCloseable {
         this.start();
     }
 
+    public void setServerObserver(IServerObserver serverObserver) {
+        this.serverObserver = serverObserver;
+    }
+
     public void writeObject(Object object) throws IOException {
         if (this.output == null) {
             this.output = new ObjectOutputStream(this.socket.getOutputStream());
@@ -39,9 +47,9 @@ public class BattleshipPeerClient implements AutoCloseable {
     private void start() {
         new Thread(() -> {
             try {
-                Object message;
-                while ((message = this.input.readObject()) != null) {
-                    System.out.println(message);
+                Object object;
+                while ((object = this.input.readObject()) != null) {
+                    this.serverObserver.send(object);
                 }
             } catch (IOException | ClassNotFoundException e) {
                 System.out.println("Connection error: " + e.getMessage());
