@@ -2,7 +2,12 @@
 package org.itson.presentation.game;
 
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -11,24 +16,51 @@ import javax.swing.JLabel;
 public class GameView extends javax.swing.JFrame {
     private static GameView instance;
     private GameModelView gameModelView;
+    private JPanel gridPanel;
+
     /**
      * Creates new form GameView
      */
     private GameView() {
         initComponents();
-        loadTables(10,10);
-        setLocationRelativeTo(this);
+        initGridPanel(); // Inicializa el panel de la cuadrícula
+        setLocationRelativeTo(null); // Centra la ventana
     }
-    public static GameView getInstance(){
-        if(instance ==null){
+
+    public static GameView getInstance() {
+        if (instance == null) {
             instance = new GameView();
         }
         return instance;
     }
-     public void clickShoot() {
-       
-         
+
+    public void clickShoot() {
+        // Implementación del disparo
     }
+
+    /**
+     * Initializes the grid panel and adds it to pnlYourShips.
+     */
+    private void initGridPanel() {
+        // Crear el panel de la cuadrícula
+        gridPanel = new JPanel();
+        gridPanel.setLayout(new GridLayout(10, 10)); // Configurar como 10x10
+        gridPanel.setPreferredSize(new Dimension(400, 400)); // Dimensiones del panel
+
+        // Añadir botones al panel de la cuadrícula
+        for (int i = 0; i < 100; i++) {
+            JButton button = new JButton();
+            button.setPreferredSize(new Dimension(20, 20));
+            gridPanel.add(button);
+        }
+
+        // Agregar la cuadrícula al panel pnlYourShips
+        pnlYourShips.setLayout(new BorderLayout());
+        pnlYourShips.add(gridPanel, BorderLayout.CENTER);
+        pnlYourShips.revalidate(); // Asegura que el panel se actualice correctamente
+        pnlYourShips.repaint();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -428,17 +460,7 @@ public class GameView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loadTables(int row,int column){
-        int totalElements = row*column;
-        for(int i=0;i<totalElements;i++){
-                JLabel lblYourShip = new JLabel();
-                lblYourShip.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-                JLabel lblForEnemy = new JLabel();
-                lblForEnemy.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-                this.pnlYourShips.add(lblYourShip);
-                this.pnlEnemyShips.add(lblForEnemy);
-        }
-    }
+   
     /**
      * @param args the command line arguments
      */
