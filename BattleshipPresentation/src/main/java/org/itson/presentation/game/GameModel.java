@@ -19,6 +19,7 @@ public class GameModel {
     }
 
     public void update() {
+        
     }
 
     public static GameModel getInstance() {
@@ -32,5 +33,12 @@ public class GameModel {
     public void shoot(Coordiante point) {
 
     }
+
+    public void setGameObserver(IGameObserver gameObserver) {
+        this.gameOberver = gameObserver;
+    }
     
+    public void setGame(Game game) {
+        this.game = game;
+    }
 }

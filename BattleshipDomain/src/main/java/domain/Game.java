@@ -14,5 +14,14 @@ public class Game implements Serializable {
 
     private GameState state;
     private Player turn;
-    private Player[] player = new Player[2];    
+    private Player[] player = new Player[2];   
+    
+    public void addPlayer(Player player) {
+        for (int i = 0; i < this.player.length; i++) {
+            if (this.player[i] == null) {
+                this.player[i] = player;
+                break;
+            }
+        }
+    }
 }
