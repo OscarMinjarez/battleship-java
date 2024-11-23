@@ -1,5 +1,6 @@
 package org.itson.presentation.factories;
 
+import org.itson.presentation.contracts.IScreenFactory;
 import domain.Game;
 import org.itson.presentation.game.GameModelView;
 import org.itson.presentation.standby.StandbyViewModel;

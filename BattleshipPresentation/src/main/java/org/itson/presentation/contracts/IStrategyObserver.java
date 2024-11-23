@@ -1,5 +1,5 @@
 
-package org.itson.presentation.strategy;
+package org.itson.presentation.contracts;
 /**
  *
  * @author PabloCeasxr

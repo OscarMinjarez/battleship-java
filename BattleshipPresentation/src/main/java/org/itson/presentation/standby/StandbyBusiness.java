@@ -3,12 +3,13 @@ package org.itson.presentation.standby;
 import domain.Game;
 import domain.Player;
 import java.io.IOException;
-import org.itson.peertopeer.BattleshipPeerToPeerFacade;
-import org.itson.peertopeer.IBattleshipPeerToPeerFacade;
+import org.itson.peertopeer.facade.BattleshipPeerToPeerFacade;
+import org.itson.peertopeer.facade.IBattleshipPeerToPeerFacade;
+import org.itson.presentation.contracts.IBusinessObserver;
 import org.itson.presentation.factories.ScreenFactory;
 
 
-public class StandbyBusiness {
+public class StandbyBusiness implements IBusinessObserver {
     
     private IBattleshipPeerToPeerFacade facade;
     private static StandbyBusiness instance;
@@ -16,6 +17,7 @@ public class StandbyBusiness {
     
     private StandbyBusiness() {
         this.facade = new BattleshipPeerToPeerFacade();
+        this.facade.setBusinessObserver(this);
         this.game = new Game();
     }
     
@@ -45,6 +47,11 @@ public class StandbyBusiness {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    @Override
+    public void notify(Object object) {
+        System.out.println(object);
     }
     
     public static void main(String[] args) {

@@ -1,13 +1,15 @@
-package org.itson.peertopeer;
+package org.itson.peertopeer.facade;
 
 import java.io.IOException;
+import org.itson.peertopeer.BattleshipPeerNode;
+import org.itson.presentation.contracts.IBusinessObserver;
 
 public class BattleshipPeerToPeerFacade implements IBattleshipPeerToPeerFacade {
 
-    private BattleshipPeerNode node;
+    private final BattleshipPeerNode node;
 
     public BattleshipPeerToPeerFacade() {
-        this.node = new BattleshipPeerNode();
+        this.node = BattleshipPeerNode.getInstance();
     }
 
     @Override
@@ -23,5 +25,10 @@ public class BattleshipPeerToPeerFacade implements IBattleshipPeerToPeerFacade {
     @Override
     public void writeObject(Object object) throws IOException {
         this.node.writeObject(object);
+    }
+    
+    @Override
+    public void setBusinessObserver(IBusinessObserver businessObserver) {
+        this.node.setBusinessObserver(businessObserver);
     }
 }

@@ -5,19 +5,36 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
+import org.itson.peertopeer.model.BattleshipPeerMessage;
+import org.itson.peertopeer.IServerObserver;
 
 public class BattleshipPeerServer {
     
     private ServerSocket serverSocket;
     private CopyOnWriteArrayList<ClientHandler> clients;
+    
+    private IServerObserver serverObserver;
 
     public BattleshipPeerServer(int port) throws IOException {
         this.clients = new CopyOnWriteArrayList<>();
         this.serverSocket = new ServerSocket(port);
     }
+    
+    public void setServerObserver(IServerObserver serverObserver) {
+        this.serverObserver = serverObserver;
+    }
 
-    public void runServer() {
+    public Object runServer() {
+        Map<String, Object> data = new HashMap<>();
+        data.put("port", this.serverSocket.getLocalPort());
+        this.serverObserver.send(
+                new BattleshipPeerMessage(
+                        data
+                )
+        );
         while (true) {
             try {
                 Socket socket = this.serverSocket.accept();

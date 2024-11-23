@@ -1,5 +1,5 @@
 
-package org.itson.presentation.game;
+package org.itson.presentation.contracts;
 
 /**
  *

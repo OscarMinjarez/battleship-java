@@ -1,5 +1,7 @@
 package org.itson.presentation.standby;
 
+import org.itson.presentation.contracts.IStandbyObserver;
+
 public class StandbyModel {
     
     private static StandbyModel instance;
