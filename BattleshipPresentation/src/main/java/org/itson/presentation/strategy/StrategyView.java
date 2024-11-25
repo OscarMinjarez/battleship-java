@@ -57,8 +57,8 @@ public class StrategyView extends javax.swing.JFrame {
         initGridPanel();
         initCustomButtonRow();
         setLocationRelativeTo(null);
-        setSize(800, 600);
-        setResizable(false);
+        setSize(1280, 720);
+        setResizable(true);
         pack();
 
     }
