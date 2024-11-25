@@ -7,7 +7,6 @@ import java.awt.List;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JButton;
-import org.itson.presentation.contracts.IStrategyObserver;
 import org.itson.presentation.strategy.StrategyModel;
 import org.itson.presentation.strategy.StrategyView;
 

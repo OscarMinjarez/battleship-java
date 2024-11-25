@@ -3,17 +3,23 @@ package org.itson.presentation.standby;
 import domain.Game;
 import domain.Player;
 import java.io.IOException;
+import java.util.Map;
+import lombok.Setter;
 import org.itson.peertopeer.facade.BattleshipPeerToPeerFacade;
 import org.itson.peertopeer.facade.IBattleshipPeerToPeerFacade;
+import org.itson.peertopeer.model.BattleshipPeerMessage;
 import org.itson.presentation.contracts.IBusinessObserver;
+import org.itson.presentation.contracts.IModelObserver;
 import org.itson.presentation.factories.ScreenFactory;
 
 
 public class StandbyBusiness implements IBusinessObserver {
     
-    private IBattleshipPeerToPeerFacade facade;
     private static StandbyBusiness instance;
+    private IBattleshipPeerToPeerFacade facade;
     private Game game;
+    
+    @Setter private IModelObserver modelObserver;
     
     private StandbyBusiness() {
         this.facade = new BattleshipPeerToPeerFacade();
@@ -43,7 +49,6 @@ public class StandbyBusiness implements IBusinessObserver {
     public void runServer() {
         try {
             this.facade.run(0);
-//            this.facade.connect("localhost", 5000);
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -51,7 +56,22 @@ public class StandbyBusiness implements IBusinessObserver {
     
     @Override
     public void notify(Object object) {
-        System.out.println(object);
+        if (object instanceof BattleshipPeerMessage message) {
+            Map<String, Object> notification = message.getMessage();
+            if (notification != null && notification.containsKey("port")) {
+                int port = (int) notification.get("port");
+                this.connect(port);
+                return;
+            }
+            if (notification != null && notification.containsKey("client")) {
+                this.modelObserver.notify(object);
+                return;
+            }
+        }
+    }
+    
+    private void connect(int port) {
+        this.facade.connect(port);
     }
     
     public static void main(String[] args) {

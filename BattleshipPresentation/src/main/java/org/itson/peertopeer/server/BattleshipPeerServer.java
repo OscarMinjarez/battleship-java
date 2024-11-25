@@ -27,18 +27,30 @@ public class BattleshipPeerServer {
         this.serverObserver = serverObserver;
     }
 
-    public Object runServer() {
-        Map<String, Object> data = new HashMap<>();
-        data.put("port", this.serverSocket.getLocalPort());
-        this.serverObserver.send(
-                new BattleshipPeerMessage(
-                        data
-                )
-        );
+    public void runServer() {
+        new Thread(() -> {
+            Map<String, Object> data = new HashMap<>();
+            data.put("port", this.serverSocket.getLocalPort());
+            System.out.println("Port from server..." + this.serverSocket.getLocalPort());
+            this.serverObserver.send(
+                    new BattleshipPeerMessage(
+                            data
+                    )
+            );
+        }).start();
         while (true) {
             try {
                 Socket socket = this.serverSocket.accept();
-                System.out.println("Client connected: " + socket.toString());
+                Map<String, Object> data = new HashMap<>();
+                data.put("client", socket);
+                new Thread(() -> {
+                    System.out.println("Client connected..." + socket.getInetAddress() + ":" + socket.getLocalPort());
+                    this.serverObserver.send(
+                            new BattleshipPeerMessage(
+                                    data
+                            )
+                    );
+                }).start();
                 ClientHandler clientHandler = new ClientHandler(socket);
                 this.clients.add(clientHandler);
                 new Thread(clientHandler).start();

@@ -1,4 +1,4 @@
-package org.itson.presentation.contracts;
+package org.itson.presentation.factories;
 
 import domain.Game;
 

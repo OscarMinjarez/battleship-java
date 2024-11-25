@@ -1,7 +1,6 @@
 
 package org.itson.presentation.strategy;
 
-import org.itson.presentation.contracts.IStrategyObserver;
 import domain.Player;
 import domain.Ship;
 import java.awt.List;

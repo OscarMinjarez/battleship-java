@@ -18,6 +18,11 @@ public class BattleshipPeerToPeerFacade implements IBattleshipPeerToPeerFacade {
     }
 
     @Override
+    public void connect(int port) {
+        this.node.connect(port);
+    }
+    
+    @Override
     public void connect(String host, int port) {
         this.node.connect(host, port);
     }

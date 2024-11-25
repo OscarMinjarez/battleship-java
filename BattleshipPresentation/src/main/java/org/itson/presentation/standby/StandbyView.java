@@ -1,5 +1,11 @@
 package org.itson.presentation.standby;
 
+import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
+import lombok.Setter;
+import org.itson.peertopeer.model.BattleshipPeerMessage;
+
 public class StandbyView extends javax.swing.JFrame {
 
     private static StandbyView instance;
@@ -22,8 +28,15 @@ public class StandbyView extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    public void update(String action) {
-
+    public void update(Object object) {
+        if (object instanceof HashMap message) {
+            if (message != null && message.containsKey("host")) {
+                this.lblHostValue.setText(message.get("host").toString());
+            }
+            if (message != null && message.containsKey("port")) {
+                this.lblPortValue.setText(message.get("port").toString());
+            }
+        }
     }
 
     /**
@@ -35,60 +48,76 @@ public class StandbyView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblWaitingPlayer = new javax.swing.JLabel();
+        lblHost = new javax.swing.JLabel();
+        lblPort = new javax.swing.JLabel();
+        btnCancel = new javax.swing.JButton();
+        lblHostValue = new javax.swing.JLabel();
+        lblPortValue = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Standby");
         setResizable(false);
+
+        lblWaitingPlayer.setText("Waiting player...");
+
+        lblHost.setText("Host:");
+
+        lblPort.setText("Port:");
+
+        btnCancel.setText("Cancel");
+
+        lblHostValue.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        lblPortValue.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblPort)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPortValue))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblHost)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblHostValue))
+                    .addComponent(lblWaitingPlayer)
+                    .addComponent(btnCancel))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblWaitingPlayer)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHost)
+                    .addComponent(lblHostValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPort)
+                    .addComponent(lblPortValue))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancel)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StandbyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StandbyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StandbyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StandbyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StandbyView().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JLabel lblHost;
+    private javax.swing.JLabel lblHostValue;
+    private javax.swing.JLabel lblPort;
+    private javax.swing.JLabel lblPortValue;
+    private javax.swing.JLabel lblWaitingPlayer;
     // End of variables declaration//GEN-END:variables
 }

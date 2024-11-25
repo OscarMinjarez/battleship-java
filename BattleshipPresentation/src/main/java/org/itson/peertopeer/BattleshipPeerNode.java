@@ -34,6 +34,15 @@ public class BattleshipPeerNode implements IServerObserver {
             }
         }).start();
     }
+    
+    public void connect(int port) {
+        try {
+            this.peerClient = new BattleshipPeerClient(port);
+            this.peerClient.setServerObserver(this);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public void connect(String host, int port) {
         try {

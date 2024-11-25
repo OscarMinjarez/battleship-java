@@ -1,6 +1,5 @@
 package org.itson.presentation.game;
 
-import org.itson.presentation.contracts.IGameObserver;
 import domain.Coordiante;
 import domain.Game;
 

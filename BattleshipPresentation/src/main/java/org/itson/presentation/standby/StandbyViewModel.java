@@ -1,7 +1,5 @@
 package org.itson.presentation.standby;
 
-import org.itson.presentation.contracts.IStandbyObserver;
-
 public class StandbyViewModel implements IStandbyObserver {
     
     private static StandbyViewModel instance;
@@ -26,7 +24,7 @@ public class StandbyViewModel implements IStandbyObserver {
     }
     
     @Override
-    public void update() {
-        
+    public void update(Object object) {
+        this.standbyView.update(object);
     }
 }
