@@ -1,86 +1,185 @@
-
 package org.itson.presentation.strategy;
 
-import domain.Ship;
-import java.awt.Color;
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Map;
-import javax.swing.JButton;
-import org.itson.presentation.strategy.StrategyModel;
-import org.itson.presentation.strategy.StrategyView;
+import javax.swing.*;
+import java.awt.*;
 
+public class StrategyModelView {
 
+    private static StrategyModelView instance;
+    private final StrategyBusiness business;
+    private final StrategyView view;
 
-/**
- *
- * @author PabloCeasxr
- */
-public class StrategyModelView implements IStrategyObserver {
-    private StrategyModel strategyModel;
-    private final java.util.List<IStrategyObserver> observers;
+    private int currentShipSize = 0;
+    private boolean horizontalOrientation = true;
 
-    public StrategyModelView(StrategyModel strategyModel) {
-        this.strategyModel = strategyModel;
-        this.strategyModel.addObserver(this); // El ViewModel observa al Modelo
-        observers = new ArrayList<>();
+    private StrategyModelView() {
+        business = StrategyBusiness.getInstance();
+        view = StrategyView.getInstance();
     }
 
-    public void addObserver(IStrategyObserver observer) {
-        observers.add(observer);
+    public static StrategyModelView getInstance() {
+        if (instance == null) {
+            instance = new StrategyModelView();
+        }
+        return instance;
     }
 
-    public void removeObserver(IStrategyObserver observer) {
-        observers.remove(observer);
+    /**
+     * Inicializa el panel lateral con botones para seleccionar barcos y
+     * orientación.
+     */
+    public void initCustomButtonRow() {
+        JPanel customButtonRowPanel = new JPanel();
+        customButtonRowPanel.setLayout(new BoxLayout(customButtonRowPanel, BoxLayout.Y_AXIS));
+
+        String[] buttonNames = {"Aircraft carriers", "Cruisers", "Submarines", "Ships"};
+        int[] shipSizes = {4, 3, 2, 1};
+
+        for (int i = 0; i < buttonNames.length; i++) {
+            String name = buttonNames[i];
+            int size = shipSizes[i];
+            JButton button = new JButton(name);
+            button.addActionListener(e -> {
+                currentShipSize = size;
+                System.out.println(name + " seleccionado con tamaño " + size);
+            });
+            customButtonRowPanel.add(button);
+        }
+
+        JButton horizontalButton = new JButton("Horizontal");
+        horizontalButton.addActionListener(e -> {
+            horizontalOrientation = true;
+            System.out.println("Orientacion seleccionada: Horizontal");
+        });
+        customButtonRowPanel.add(horizontalButton);
+
+        JButton verticalButton = new JButton("Vertical");
+        verticalButton.addActionListener(e -> {
+            horizontalOrientation = false;
+            System.out.println("Orientacion seleccionada: Vertical");
+        });
+        customButtonRowPanel.add(verticalButton);
+
+        view.addCustomButtonPanel(customButtonRowPanel);
     }
 
-    private void notifyObservers() {
-        for (IStrategyObserver observer : observers) {
-            observer.update();
+    private void paintShip(int startIndex, String shipType, boolean horizontal, JButton[] buttons) {
+        int size = getShipSize(shipType); // Obtén el tamaño del barco según su tipo
+
+        for (int i = 0; i < size; i++) {
+            int index = horizontal ? startIndex + i : startIndex + i * 10;
+            buttons[index].setBackground(Color.RED); // Pinta las celdas ocupadas
         }
     }
 
-    public Map<String, Integer> getShipsAvailable() {
-        return strategyModel.getShipsAvailable();
+    /**
+     * Maneja el clic en un botón de la cuadrícula.
+     */
+    public void handleGridButtonClick(int index) {
+        if (currentShipSize == 0) {
+            System.out.println("Por favor selecciona un barco.");
+            return;
+        }
+
+        JButton[] buttons = view.getGridButtons();
+        // Verifica si el barco puede ser colocado
+        if (!canPlaceShip(index, currentShipSize, horizontalOrientation, buttons)) {
+            System.out.println("No hay espacio suficiente para colocar el barco.");
+            return;
+        }
+
+        // Coloca el barco
+        placeShip(index, currentShipSize, horizontalOrientation, buttons);
+
+        // Actualiza el modelo de negocio
+        business.placeShip(getShipTypeBySize(currentShipSize));
+
+        // Actualiza la vista con la información de barcos restantes
+        view.updateShipsCountLabel(business.getShipsAvailable());
     }
 
-    public boolean canPlaceShip(int startIndex, int shipSize, boolean horizontalOrientation, JButton[] gridButtons) {
+    public void placeShip(int startIndex, int currentShipSize, boolean horizontalOrientation, JButton[] buttons) {
+        // Pintar el barco en la cuadrícula
+        for (int i = 0; i < currentShipSize; i++) {
+            int index = horizontalOrientation ? startIndex + i : startIndex + i * 10;
+            buttons[index].setBackground(Color.RED); // Pinta las celdas ocupadas
+        }
+
+        System.out.println("Barco colocado en posición " + startIndex + " con orientación "
+                + (horizontalOrientation ? "Horizontal" : "Vertical"));
+    }
+
+    /**
+     * Verifica si un barco puede ser colocado en la cuadrícula.
+     */
+    private boolean canPlaceShip(int startIndex, int shipSize, boolean horizontal, JButton[] buttons) {
         int row = startIndex / 10;
-
         for (int i = 0; i < shipSize; i++) {
-            int checkIndex = horizontalOrientation ? startIndex + i : startIndex + i * 10;
+            int index = horizontal ? startIndex + i : startIndex + i * 10;
 
-            if (checkIndex >= gridButtons.length) {
+            // Verifica límites de la cuadrícula
+            if (index >= buttons.length || buttons[index].getBackground() == Color.RED) {
                 return false;
             }
-
-            int checkRow = checkIndex / 10;
-
-            if (horizontalOrientation && checkRow != row) {
-                return false;
-            }
-
-            if (gridButtons[checkIndex].getBackground() == Color.RED) {
-                return false;
+            if (horizontal && index / 10 != row) {
+                return false; // Se sale de la fila
             }
         }
         return true;
     }
 
-    public void placeShip(int startIndex, int shipSize, boolean horizontalOrientation, JButton[] gridButtons) {
-        for (int i = 0; i < shipSize; i++) {
-            int paintIndex = horizontalOrientation ? startIndex + i : startIndex + i * 10;
-            gridButtons[paintIndex].setBackground(Color.RED);
+    /**
+     * Pinta un barco en la cuadrícula.
+     */
+    public void placeShip(String shipType, int startIndex, boolean horizontal) {
+        JButton[] buttons = view.getGridButtons();
+
+        // Verifica si se puede colocar el barco
+        if (!canPlaceShip(startIndex, getShipSize(shipType), horizontal, buttons)) {
+            System.out.println("No hay espacio suficiente para colocar el barco.");
+            return;
         }
-        notifyObservers(); // Notificar a los observadores (Vista) sobre los cambios
+
+        // Pinta el barco
+        paintShip(startIndex, shipType, horizontal, buttons);
+
+        // Lógica del negocio
+        business.placeShip(shipType);
+
+        // Actualiza la interfaz
+        view.updateShipsCountLabel(business.getShipsAvailable());
     }
 
-    public void handleShipPlacement(String shipType) {
-        strategyModel.placeShip(shipType);
+    private int getShipSize(String shipType) {
+        return switch (shipType) {
+            case "Aircraft carriers" ->
+                4;
+            case "Cruisers" ->
+                3;
+            case "Submarines" ->
+                2;
+            case "Ships" ->
+                1;
+            default ->
+                0; // Devuelve 0 si el tipo de barco no coincide
+        };
     }
 
-    @Override
-    public void update() {
-        notifyObservers(); // Propagar la notificación a los observadores (Vista)
+    /**
+     * Obtiene el tipo de barco según su tamaño.
+     */
+    private String getShipTypeBySize(int size) {
+        return switch (size) {
+            case 4 ->
+                "Aircraft carriers";
+            case 3 ->
+                "Cruisers";
+            case 2 ->
+                "Submarines";
+            case 1 ->
+                "Ships";
+            default ->
+                null; // Devuelve null si el tamaño no coincide
+        };
     }
 }

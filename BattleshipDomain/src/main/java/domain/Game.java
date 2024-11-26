@@ -14,14 +14,21 @@ public class Game implements Serializable {
 
     private GameState state;
     private Player turn;
-    private Player[] player = new Player[2];   
-    
+    private Player[] players = new Player[2]; // Arreglo para almacenar dos jugadores
+
+    /**
+     * Método para añadir un jugador al arreglo de jugadores.
+     *
+     * @param player Jugador a añadir.
+     * @throws IllegalStateException Si ya hay dos jugadores registrados.
+     */
     public void addPlayer(Player player) {
-        for (int i = 0; i < this.player.length; i++) {
-            if (this.player[i] == null) {
-                this.player[i] = player;
-                break;
-            }
+        if (players[0] == null) {
+            players[0] = player;
+        } else if (players[1] == null) {
+            players[1] = player;
+        } else {
+            throw new IllegalStateException("El juego ya tiene dos jugadores.");
         }
     }
 }

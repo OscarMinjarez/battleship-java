@@ -10,17 +10,20 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.release>22</maven.compiler.release> <!-- Configura JDK 22 -->
-        <exec.mainClass>org.itson.battleshippresentation.view.StrategyView</exec.mainClass>
+        <maven.compiler.source>22</maven.compiler.source> <!-- JDK 22 -->
+        <maven.compiler.target>22</maven.compiler.target> <!-- JDK 22 -->
+        <exec.mainClass>org.itson.presentation.strategy.StrategyBusiness</exec.mainClass>
     </properties>
 
     <dependencies>
+        <!-- Dependencia para el módulo del dominio -->
         <dependency>
             <groupId>org.itson</groupId>
             <artifactId>BattleshipDomain</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        
+
+        <!-- Lombok para simplificar los modelos -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -31,22 +34,14 @@
 
     <build>
         <plugins>
-            <!-- Configuración del compilador de Maven -->
+            <!-- Configuración del compilador -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
-                    <release>22</release> <!-- Usar JDK 22 -->
-                </configuration>
-            </plugin>
-            
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <release>22</release>
+                    <source>22</source> <!-- JDK 22 -->
+                    <target>22</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -71,9 +66,6 @@
                 </executions>
                 <configuration>
                     <mainClass>${exec.mainClass}</mainClass>
-                    <arguments>
-                        <argument>-XX:MaxMetaspaceSize=512m</argument>
-                    </arguments>
                 </configuration>
             </plugin>
         </plugins>

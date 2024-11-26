@@ -1,66 +1,19 @@
 package org.itson.presentation.strategy;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.util.HashMap;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Map;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import org.itson.presentation.strategy.StrategyModelView;
 
-/**
- *
- * @author PabloCeasxr
- */
-public class StrategyView extends javax.swing.JFrame {
+public class StrategyView extends JFrame implements IStrategyObserver {
 
-    private StrategyModelView strategyModelView;
     private static StrategyView instance;
-    private ImageIcon boatIcon;
-    private JLabel boatLabel;
-    private Point initialClick;
     private JPanel gridPanel;
-    private JLayeredPane layeredPane;
-    private JButton[] gridButtons;
-    private int currentShipSize = 0;
-    private boolean horizontalOrientation = true;
-    private JButton[] selectedButtons = new JButton[4];
-    private int selectedCount = 0;
-    private Map<String, Integer> shipsAvailable = new HashMap<>() {
-        {
-            put("Aircraft carriers", 2);
-            put("Cruisers", 2);
-            put("Submarines", 4);
-            put("Ships", 3);
-        }
-    };
+    private JButton[] gridButtons; // Arreglo de botones de la cuadrícula
+    private JLabel shipsLabel; // Etiqueta para mostrar el estado de los barcos disponibles
+    private JLayeredPane layeredPane; // Panel en capas para personalizar botones y cuadrícula
 
-    /**
-     * Creates new form StrategyView
-     */
     private StrategyView() {
-        initComponents();
-        initShips();
-        initLayeredPane();
-
-        initGridPanel();
-        initCustomButtonRow();
-        setLocationRelativeTo(null);
-        setSize(1280, 720);
-        setResizable(true);
-        pack();
-
+        initializeComponents(); // Método manual para inicializar componentes
     }
 
     public static StrategyView getInstance() {
@@ -70,55 +23,57 @@ public class StrategyView extends javax.swing.JFrame {
         return instance;
     }
 
-    private void initShips() {
-        shipsAvailable.put("Aircraft carriers", 2);
-        shipsAvailable.put("Cruisers", 2);
-        shipsAvailable.put("Submarines", 4);
-        shipsAvailable.put("Ships", 3);
+    /**
+     * Inicializa los componentes principales de la vista.
+     */
+    private void initializeComponents() {
+        setTitle("Strategy Game");
+        setSize(1280, 720);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new BorderLayout());
+
+        // Crear el panel en capas
+        initLayeredPane();
+
+        // Crear la cuadrícula
+        initGridPanel();
+
+        // Crear los botones personalizados
+        initCustomButtonRow();
+
+        // Crear etiqueta para mostrar el estado de los barcos disponibles
+        shipsLabel = new JLabel("<html>Ships available:<br></html>");
+        add(shipsLabel, BorderLayout.PAGE_END);
     }
 
-    private void initGridPanel() {
-        gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(10, 10)); 
-        gridPanel.setSize(new Dimension(400, 400));
-        gridButtons = new JButton[100];
-
-        for (int i = 0; i < 100; i++) {
-            JButton button = new JButton();
-            button.setPreferredSize(new Dimension(20, 20));
-            gridButtons[i] = button; // save button
-
-            // Solution 
-            final int index = i;
-
-            
-            button.addActionListener(e -> handleGridButtonClick(button, index));
-
-            gridPanel.add(button);
-        }
-
-        layeredPane.add(gridPanel, JLayeredPane.DEFAULT_LAYER);
-        gridPanel.setLocation(200, 0);
-    }
-
+    /**
+     * Inicializa el panel en capas para personalizar la vista.
+     */
     private void initLayeredPane() {
         layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(400, 400));
-        getContentPane().add(layeredPane, java.awt.BorderLayout.CENTER);
+        getContentPane().add(layeredPane, BorderLayout.CENTER);
     }
 
-    private void updateShipsCountLabel() {
-        StringBuilder labelText = new StringBuilder("Ships left: ");
-        for (Map.Entry<String, Integer> entry : shipsAvailable.entrySet()) {
-            labelText.append(entry.getKey())
-                    .append(": ")
-                    .append(entry.getValue())
-                    .append(", ");
+    /**
+     * Inicializa la cuadrícula de botones.
+     */
+    private void initGridPanel() {
+        gridPanel = new JPanel(new GridLayout(10, 10));
+        gridButtons = new JButton[100];
+
+        for (int i = 0; i < 100; i++) {
+            gridButtons[i] = new JButton();
+            gridPanel.add(gridButtons[i]);
         }
-      
-        System.out.println(labelText.toString());
+
+        layeredPane.add(gridPanel, JLayeredPane.DEFAULT_LAYER);
+        gridPanel.setBounds(200, 0, 400, 400); // Ajusta la posición y el tamaño de la cuadrícula
     }
 
+    /**
+     * Inicializa los botones personalizados para seleccionar barcos y orientación.
+     */
     private void initCustomButtonRow() {
         JPanel customButtonRowPanel = new JPanel();
         customButtonRowPanel.setLayout(null);
@@ -137,181 +92,78 @@ public class StrategyView extends javax.swing.JFrame {
             button.setBounds(10, yPosition, 130, 40);
             yPosition += 50;
 
-            button.addActionListener(e -> {
-                currentShipSize = size;
-                System.out.println(name + " seleccionado con tamaño " + size);
-            });
-
             customButtonRowPanel.add(button);
         }
 
         JButton horizontalButton = new JButton("Horizontal");
         horizontalButton.setBounds(10, yPosition, 130, 40);
-        horizontalButton.addActionListener(e -> {
-            horizontalOrientation = true;
-            System.out.println("Orientacion seleccionada: Horizontal");
-        });
         customButtonRowPanel.add(horizontalButton);
 
         yPosition += 50;
 
         JButton verticalButton = new JButton("Vertical");
         verticalButton.setBounds(10, yPosition, 130, 40);
-        verticalButton.addActionListener(e -> {
-            horizontalOrientation = false;
-            System.out.println("Orientacion seleccionada: Vertical");
-        });
         customButtonRowPanel.add(verticalButton);
 
         layeredPane.add(customButtonRowPanel, JLayeredPane.PALETTE_LAYER);
     }
 
-  
-    private void handleGridButtonClick(JButton button, int index) {
-        if (currentShipSize == 0) {
-            System.out.println("Por favor selecciona un barco.");
-            return;
-        }
-
-   
-        if (!canPlaceShip(index)) {
-            System.out.println("No hay espacio suficiente para colocar el barco.");
-            return;
-        }
-
-       
-        placeShip(index);
-
-       
-        updateShipsAvailable();
-        currentShipSize = 0; 
-    }
-
-    private boolean canPlaceShip(int startIndex) {
-        int row = startIndex / 10;
-        int col = startIndex % 10;
-
-        for (int i = 0; i < currentShipSize; i++) {
-            int checkIndex = horizontalOrientation ? startIndex + i : startIndex + i * 10;
-
-            if (checkIndex >= gridButtons.length) {
-                return false; 
-            }
-            int checkRow = checkIndex / 10;
-            int checkCol = checkIndex % 10;
-
-      
-            if (horizontalOrientation && checkRow != row) {
-                return false;
-            }
-
-            // Validcion cassilla disponiblidad
-            if (gridButtons[checkIndex].getBackground() == Color.RED) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private void placeShip(int startIndex) {
-        for (int i = 0; i < currentShipSize; i++) {
-            int paintIndex = horizontalOrientation ? startIndex + i : startIndex + i * 10;
-            gridButtons[paintIndex].setBackground(Color.RED);
-        }
-        System.out.println("Barco colocado en orientación " + (horizontalOrientation ? "Horizontal" : "Vertical"));
-    }
-
-    private boolean isValidSelection() {
-        if (horizontalOrientation) {
-            int row = selectedButtons[0].getY() / selectedButtons[0].getHeight();
-            for (int i = 1; i < selectedCount; i++) {
-                int currentRow = selectedButtons[i].getY() / selectedButtons[i].getHeight();
-                if (currentRow != row) {
-                    return false;
-                }
-            }
-        } else {
-            int col = selectedButtons[0].getX() / selectedButtons[0].getWidth();
-            for (int i = 1; i < selectedCount; i++) {
-                int currentCol = selectedButtons[i].getX() / selectedButtons[i].getWidth();
-                if (currentCol != col) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private void finalizeSelection(String shipType) {
-        for (JButton button : selectedButtons) {
-            if (button != null) {
-                button.setBackground(Color.RED);
-            }
-        }
-
-       
-        shipsAvailable.put(shipType, shipsAvailable.get(shipType) - 1);
-
-        System.out.println(shipType + " colocado.");
-        updateShipsCountLabel();
-
-        currentShipSize = 0; 
-        selectedCount = 0; 
-    }
-
-    private void resetSelection() {
-        for (JButton button : selectedButtons) {
-            if (button != null) {
-                button.setBackground(null);
-            }
-        }
-        selectedCount = 0; 
-    }
-
-    private String getShipTypeBySize(int size) {
-        switch (size) {
-            case 4:
-                return "Aircraft carriers";
-            case 3:
-                return "Cruisers";
-            case 2:
-                return "Submarines";
-            case 1:
-                return "Ships";
-            default:
-                return "";
-        }
-    }
-
-    private void updateShipsAvailable() {
-        for (Map.Entry<String, Integer> entry : shipsAvailable.entrySet()) {
-            if (entry.getValue() > 0 && entry.getValue() == currentShipSize) {
-                shipsAvailable.put(entry.getKey(), entry.getValue() - 1);
-                System.out.println("Quedan " + entry.getValue() + " " + entry.getKey());
-                break;
-            }
-        }
-    }
-
-    public void clickReady() {
-    }
-
-    public void clickPutShipOnTable() {
-    }
-
-    public void clickRotateShip() {
-    }
-
-    public void clickExitGame() {
+    /**
+     * Obtiene los botones de la cuadrícula.
+     *
+     * @return Arreglo de botones de la cuadrícula.
+     */
+    public JButton[] getGridButtons() {
+        return gridButtons;
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
+     * Actualiza el estado de los barcos disponibles.
+     *
+     * @param object Mapa que contiene los tipos de barcos y sus cantidades.
      */
-    // </editor-fold>
-    @SuppressWarnings("unchecked")
+    @Override
+public void update(Object object) {
+    if (object instanceof Map<?, ?> shipsAvailable) {
+        updateShipsCountLabel((Map<String, Integer>) shipsAvailable);
+    }
+}
+
+
+    /**
+     * Actualiza la etiqueta con el estado de los barcos disponibles.
+     *
+     * @param shipsAvailable Mapa que contiene los tipos de barcos y sus
+     * cantidades.
+     */
+    public void updateShipsCountLabel(Map<String, Integer> shipsAvailable) {
+    StringBuilder labelText = new StringBuilder("<html>Ships available:<br>");
+    shipsAvailable.forEach((key, value) -> labelText.append(key)
+            .append(": ")
+            .append(value)
+            .append("<br>"));
+    labelText.append("</html>");
+    shipsLabel.setText(labelText.toString());
+}
+
+    /**
+     * Agrega un panel personalizado a la vista.
+     *
+     * @param panel Panel a añadir.
+     */
+    public void addCustomButtonPanel(JPanel panel) {
+        add(panel, BorderLayout.LINE_END); // Añade el panel al lado derecho
+        revalidate(); // Refresca el layout
+        repaint();   // Redibuja la interfaz
+    }
+
+/**
+ * This method is called from within the constructor to initialize the form.
+ * WARNING: Do NOT modify this code. The content of this method is always
+ * regenerated by the Form Editor.
+ */
+// </editor-fold>
+@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -355,23 +207,34 @@ public class StrategyView extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StrategyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StrategyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StrategyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StrategyView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StrategyView.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(StrategyView.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(StrategyView.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(StrategyView.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                getInstance().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            StrategyView view = getInstance();
+            view.setVisible(true);
         });
     }
 
