@@ -12,7 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>22</maven.compiler.source> <!-- JDK 22 -->
         <maven.compiler.target>22</maven.compiler.target> <!-- JDK 22 -->
-        <exec.mainClass>org.itson.presentation.strategy.StrategyBusiness</exec.mainClass>
+        <exec.mainClass>org.itson.presentation.BattleshipPresentation</exec.mainClass>
     </properties>
 
     <dependencies>

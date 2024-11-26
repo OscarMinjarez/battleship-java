@@ -7,7 +7,7 @@ import java.util.Map;
 public class StrategyModel {
 
     private static StrategyModel instance;
-    private IStrategyObserver observer; // Un único observer
+    private IStrategyObserver observer; 
     private Map<String, Integer> shipsAvailable;
 
     private StrategyModel() {
@@ -31,14 +31,13 @@ public class StrategyModel {
     }
 
     public void placeShip(String shipType) {
-    if (shipsAvailable.containsKey(shipType) && shipsAvailable.get(shipType) > 0) {
-        shipsAvailable.put(shipType, shipsAvailable.get(shipType) - 1);
-        notifyObserver();
-    } else {
-        System.out.println("No more ships of type " + shipType + " available.");
+        if (shipsAvailable.containsKey(shipType) && shipsAvailable.get(shipType) > 0) {
+            shipsAvailable.put(shipType, shipsAvailable.get(shipType) - 1);
+            notifyObserver();
+        } else {
+            System.out.println("No more ships of type " + shipType + " available.");
+        }
     }
-}
-
 
     public Map<String, Integer> getShipsAvailable() {
         return shipsAvailable;

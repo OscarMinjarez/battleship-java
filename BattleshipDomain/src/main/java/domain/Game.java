@@ -1,34 +1,39 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import java.util.ArrayList;
+import java.util.List;
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-public class Game implements Serializable {
 
-    private GameState state;
-    private Player turn;
-    private Player[] players = new Player[2]; // Arreglo para almacenar dos jugadores
+public class Game {
+
+    private final List<Player> players;
+
+    public Game() {
+        this.players = new ArrayList<>();
+    }
 
     /**
-     * Método para añadir un jugador al arreglo de jugadores.
+     * Agrega un jugador al juego.
      *
-     * @param player Jugador a añadir.
-     * @throws IllegalStateException Si ya hay dos jugadores registrados.
+     * @param player El jugador a agregar.
      */
     public void addPlayer(Player player) {
-        if (players[0] == null) {
-            players[0] = player;
-        } else if (players[1] == null) {
-            players[1] = player;
+        if (player != null) {
+            players.add(player);
+            System.out.println("Jugador añadido: " + player.getName());
         } else {
-            throw new IllegalStateException("El juego ya tiene dos jugadores.");
+            System.out.println("No se puede añadir un jugador nulo.");
         }
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }
