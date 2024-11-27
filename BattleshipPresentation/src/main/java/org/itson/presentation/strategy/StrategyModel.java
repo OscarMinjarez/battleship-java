@@ -1,46 +1,41 @@
 
 package org.itson.presentation.strategy;
 
-import domain.Player;
-import domain.Ship;
-import java.awt.List;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.*;
 
-
-/**
- *
- * @author PabloCeasxr
- */
 public class StrategyModel {
+
+    private static StrategyModel instance;
+    private IStrategyObserver observer; 
     private Map<String, Integer> shipsAvailable;
-    private java.util.List<IStrategyObserver> observers;
 
-    public StrategyModel() {
-        shipsAvailable = new HashMap<>() {
-            {
-                put("Aircraft carriers", 2);  // 2 portaaviones
-                put("Cruisers", 2);  // 2 cruceros
-                put("Submarines", 4);  // 4 submarinos
-                put("Ships", 3);  // 3 barcos de 1 celda
-            }
-        };
-        observers = new ArrayList<>();
+    private StrategyModel() {
+        shipsAvailable = new HashMap<>() {{
+            put("Aircraft carriers", 2);
+            put("Cruisers", 2);
+            put("Submarines", 4);
+            put("Ships", 3);
+        }};
     }
 
-    public void addObserver(IStrategyObserver observer) {
-        observers.add(observer);
+    public static StrategyModel getInstance() {
+        if (instance == null) {
+            instance = new StrategyModel();
+        }
+        return instance;
     }
 
-    public void removeObserver(IStrategyObserver observer) {
-        observers.remove(observer);
+    public void setObserver(IStrategyObserver observer) {
+        this.observer = observer;
     }
 
-    private void notifyObservers() {
-        for (IStrategyObserver observer : observers) {
-            observer.update();
+    public void placeShip(String shipType) {
+        if (shipsAvailable.containsKey(shipType) && shipsAvailable.get(shipType) > 0) {
+            shipsAvailable.put(shipType, shipsAvailable.get(shipType) - 1);
+            notifyObserver();
+        } else {
+            System.out.println("No more ships of type " + shipType + " available.");
         }
     }
 
@@ -48,14 +43,13 @@ public class StrategyModel {
         return shipsAvailable;
     }
 
-    public void placeShip(String shipType) {
-        if (shipsAvailable.containsKey(shipType) && shipsAvailable.get(shipType) > 0) {
-            shipsAvailable.put(shipType, shipsAvailable.get(shipType) - 1);
-            notifyObservers();  // Notificar a los observadores sobre los cambios
-        }
-    }
-
     public boolean isShipAvailable(String shipType) {
         return shipsAvailable.getOrDefault(shipType, 0) > 0;
+    }
+
+    private void notifyObserver() {
+        if (observer != null) {
+            observer.update(shipsAvailable); // Envía los datos actuales al observer
+        }
     }
 }

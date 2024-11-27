@@ -1,27 +1,39 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import java.util.ArrayList;
+import java.util.List;
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-public class Game implements Serializable {
 
-    private GameState state;
-    private Player turn;
-    private Player[] player = new Player[2];   
-    
+public class Game {
+
+    private final List<Player> players;
+
+    public Game() {
+        this.players = new ArrayList<>();
+    }
+
+    /**
+     * Agrega un jugador al juego.
+     *
+     * @param player El jugador a agregar.
+     */
     public void addPlayer(Player player) {
-        for (int i = 0; i < this.player.length; i++) {
-            if (this.player[i] == null) {
-                this.player[i] = player;
-                break;
-            }
+        if (player != null) {
+            players.add(player);
+            System.out.println("Jugador añadido: " + player.getName());
+        } else {
+            System.out.println("No se puede añadir un jugador nulo.");
         }
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }

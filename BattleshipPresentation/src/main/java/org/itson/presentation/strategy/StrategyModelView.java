@@ -1,86 +1,114 @@
-
 package org.itson.presentation.strategy;
 
-import domain.Ship;
-import java.awt.Color;
-import java.awt.List;
-import java.util.ArrayList;
-import java.util.Map;
-import javax.swing.JButton;
-import org.itson.presentation.strategy.StrategyModel;
-import org.itson.presentation.strategy.StrategyView;
+import javax.swing.*;
+import java.awt.*;
 
+public class StrategyModelView {
 
+    private static StrategyModelView instance;
+    private final StrategyBusiness business;
+    private final StrategyView view;
 
-/**
- *
- * @author PabloCeasxr
- */
-public class StrategyModelView implements IStrategyObserver {
-    private StrategyModel strategyModel;
-    private final java.util.List<IStrategyObserver> observers;
+    private int currentShipSize = 0;
+    private boolean horizontalOrientation = true;
 
-    public StrategyModelView(StrategyModel strategyModel) {
-        this.strategyModel = strategyModel;
-        this.strategyModel.addObserver(this); // El ViewModel observa al Modelo
-        observers = new ArrayList<>();
+    private StrategyModelView() {
+        business = StrategyBusiness.getInstance();
+        view = StrategyView.getInstance();
+        initialize();
     }
 
-    public void addObserver(IStrategyObserver observer) {
-        observers.add(observer);
+    public static StrategyModelView getInstance() {
+        if (instance == null) {
+            instance = new StrategyModelView();
+        }
+        return instance;
     }
 
-    public void removeObserver(IStrategyObserver observer) {
-        observers.remove(observer);
-    }
+    private void initialize() {
+        view.initCustomButtonRow(this::handleCustomButtonClick);
 
-    private void notifyObservers() {
-        for (IStrategyObserver observer : observers) {
-            observer.update();
+        JButton[] gridButtons = view.getGridButtons();
+        for (int i = 0; i < gridButtons.length; i++) {
+            final int index = i;
+            gridButtons[i].addActionListener(e -> handleGridButtonClick(index));
         }
     }
 
-    public Map<String, Integer> getShipsAvailable() {
-        return strategyModel.getShipsAvailable();
+    private void handleCustomButtonClick(String actionCommand) {
+        switch (actionCommand) {
+            case "Horizontal" -> {
+                horizontalOrientation = true;
+                System.out.println("Escogiste orientacion Horizontal");
+            }
+            case "Vertical" -> {
+                horizontalOrientation = false;
+                System.out.println("Escogiste orientacion Vertical");
+            }
+            default -> {
+                currentShipSize = getShipSize(actionCommand);
+                System.out.println(actionCommand + " seleccionado con tamaño " + currentShipSize);
+            }
+        }
     }
 
-    public boolean canPlaceShip(int startIndex, int shipSize, boolean horizontalOrientation, JButton[] gridButtons) {
+    private void handleGridButtonClick(int index) {
+        if (currentShipSize == 0) {
+            System.out.println("Por favor selecciona un barco.");
+            return;
+        }
+
+        JButton[] buttons = view.getGridButtons();
+        if (!canPlaceShip(index, currentShipSize, horizontalOrientation, buttons)) {
+            System.out.println("No hay espacio suficiente para colocar el barco.");
+            return;
+        }
+
+        placeShip(index, currentShipSize, horizontalOrientation, buttons);
+        business.placeShip(getShipTypeBySize(currentShipSize));
+        view.updateShipsCountLabel(business.getShipsAvailable());
+    }
+
+    private boolean canPlaceShip(int startIndex, int shipSize, boolean horizontal, JButton[] buttons) {
         int row = startIndex / 10;
-
         for (int i = 0; i < shipSize; i++) {
-            int checkIndex = horizontalOrientation ? startIndex + i : startIndex + i * 10;
-
-            if (checkIndex >= gridButtons.length) {
+            int index = horizontal ? startIndex + i : startIndex + i * 10;
+            if (index >= buttons.length || buttons[index].getBackground() == Color.RED) {
                 return false;
             }
-
-            int checkRow = checkIndex / 10;
-
-            if (horizontalOrientation && checkRow != row) {
-                return false;
-            }
-
-            if (gridButtons[checkIndex].getBackground() == Color.RED) {
+            if (horizontal && index / 10 != row) {
                 return false;
             }
         }
         return true;
     }
 
-    public void placeShip(int startIndex, int shipSize, boolean horizontalOrientation, JButton[] gridButtons) {
+    private void placeShip(int startIndex, int shipSize, boolean horizontal, JButton[] buttons) {
         for (int i = 0; i < shipSize; i++) {
-            int paintIndex = horizontalOrientation ? startIndex + i : startIndex + i * 10;
-            gridButtons[paintIndex].setBackground(Color.RED);
+            int index = horizontal ? startIndex + i : startIndex + i * 10;
+            buttons[index].setBackground(Color.RED);
         }
-        notifyObservers(); // Notificar a los observadores (Vista) sobre los cambios
+        System.out.println("Barco colocado en posición " + startIndex + " con orientación "
+                + (horizontal ? "Horizontal" : "Vertical"));
     }
 
-    public void handleShipPlacement(String shipType) {
-        strategyModel.placeShip(shipType);
+    private int getShipSize(String shipType) {
+        return switch (shipType) {
+            case "Aircraft carriers" -> 4;
+            case "Cruisers" -> 3;
+            case "Submarines" -> 2;
+            case "Ships" -> 1;
+            default -> 0;
+        };
     }
 
-    @Override
-    public void update() {
-        notifyObservers(); // Propagar la notificación a los observadores (Vista)
+    private String getShipTypeBySize(int size) {
+        return switch (size) {
+            case 4 -> "Aircraft carriers";
+            case 3 -> "Cruisers";
+            case 2 -> "Submarines";
+            case 1 -> "Ships";
+            default -> null;
+        };
     }
 }
