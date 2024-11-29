@@ -13,13 +13,13 @@ public class GameModel {
     private static GameModel instance;
     private Game game;
     private IGameObserver gameOberver;
-
+    private int actualCoordinate;
     private GameModel() {
 
     }
 
     public void update() {
-        
+        gameOberver.update();
     }
 
     public static GameModel getInstance() {
@@ -31,7 +31,8 @@ public class GameModel {
     }
 
     public void shoot(Coordiante point) {
-
+        // actualizar el tablero y el history 
+        System.out.println("shoot to coordinate: "+actualCoordinate);
     }
 
     public void setGameObserver(IGameObserver gameObserver) {
@@ -41,4 +42,8 @@ public class GameModel {
     public void setGame(Game game) {
         this.game = game;
     }
+    
+    public void setActualCoordinate(int actualCoordinate){
+        this.actualCoordinate=actualCoordinate;
+    } 
 }

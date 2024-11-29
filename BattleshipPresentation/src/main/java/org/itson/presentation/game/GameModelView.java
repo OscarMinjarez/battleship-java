@@ -38,4 +38,8 @@ public class GameModelView implements IGameObserver{
     public void setGame(Game game) {
         this.gameModel.setGame(game);
     }
+    
+    public void setActualCoordinate(int actualCoordinate){
+        this.gameModel.setActualCoordinate(actualCoordinate);
+    }
 }

@@ -2,9 +2,11 @@
 package org.itson.presentation.game;
 
 
+import domain.Coordiante;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -13,7 +15,7 @@ import javax.swing.JPanel;
  * @author PabloCeasxr
  */
 public class GameView extends javax.swing.JFrame {
-
+    
     private static GameView instance;
     private GameModelView gameModelView;
     private JPanel gridPanel;
@@ -26,7 +28,7 @@ public class GameView extends javax.swing.JFrame {
         initGridPanel(); // Inicializa el panel de la cuadrícula
         setLocationRelativeTo(null); // Centra la ventana
     }
-
+    
     public static GameView getInstance() {
         if (instance == null) {
             instance = new GameView();
@@ -35,40 +37,47 @@ public class GameView extends javax.swing.JFrame {
     }
     
     public void update() {
-
+        
     }
     
     public void showGameScreen() {
         this.setVisible(true);
     }
-
+    
     public void clickShoot() {
         // Implementación del disparo
+        GameModelView.getInstance().shoot(new Coordiante());
     }
 
     /**
      * Initializes the grid panel and adds it to pnlYourShips.
      */
     private void initGridPanel() {
+        createPanels(pnlEnemyShips);
+        createPanels(pnlYourShips);
+    }
+
+    public void createPanels(JPanel pnlShips){
         // Crear el panel de la cuadrícula
         gridPanel = new JPanel();
         gridPanel.setLayout(new GridLayout(10, 10)); // Configurar como 10x10
-        gridPanel.setPreferredSize(new Dimension(400, 400)); // Dimensiones del panel
+        gridPanel.setPreferredSize(new Dimension(300, 300)); // Dimensiones del panel
 
         // Añadir botones al panel de la cuadrícula
         for (int i = 0; i < 100; i++) {
-            JButton button = new JButton();
-            button.setPreferredSize(new Dimension(20, 20));
+            // crear custom button para obtener la posicion a través de un evento
+            GridButton button = new GridButton(i);
             gridPanel.add(button);
+            
         }
 
         // Agregar la cuadrícula al panel pnlYourShips
-        pnlYourShips.setLayout(new BorderLayout());
-        pnlYourShips.add(gridPanel, BorderLayout.CENTER);
-        pnlYourShips.revalidate(); // Asegura que el panel se actualice correctamente
-        pnlYourShips.repaint();
+        pnlShips.setLayout(new BorderLayout());
+        pnlShips.add(gridPanel, BorderLayout.CENTER);
+        pnlShips.revalidate(); // Asegura que el panel se actualice correctamente
+        pnlShips.repaint();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -358,6 +367,11 @@ public class GameView extends javax.swing.JFrame {
         lblHisotry.setText("history...");
 
         btnShoot.setText("shoot!");
+        btnShoot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShootActionPerformed(evt);
+            }
+        });
 
         lblTurn.setFont(new java.awt.Font("Miriam Mono CLM", 1, 14)); // NOI18N
         lblTurn.setText("Turn:");
@@ -408,7 +422,7 @@ public class GameView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(pnlEnemyColumn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(pnlEnemyShips, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(pnlEnemyShips, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblYourShips)
                                 .addGap(307, 307, 307)
@@ -468,6 +482,11 @@ public class GameView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnShootActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShootActionPerformed
+        this.clickShoot();
+    }//GEN-LAST:event_btnShootActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnShoot;
     private javax.swing.JLabel lbl1;
