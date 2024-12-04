@@ -55,13 +55,22 @@ public class StrategyBusiness implements IBusinessObserver {
      * @param shipType Tipo de barco a colocar.
      */
     public void placeShip(String shipType) {
-        if (model.isShipAvailable(shipType)) {
-            model.placeShip(shipType);
-            notifyModelUpdate(); // Notifica a la vista.
-        } else {
-            System.out.println("No hay barcos disponibles de este tipo.");
-        }
+    if (model.isShipAvailable(shipType)) {
+        model.placeShip(shipType); // Reducir el contador de barcos disponibles
+        notifyModelUpdate(); // Notificar a la vista
+    } else {
+        System.out.println("No quedan barcos disponibles de este tipo: " + shipType);
     }
+}
+/**
+ * Verifica si hay barcos disponibles de un tipo específico.
+ *
+ * @param shipType Tipo de barco.
+ * @return true si hay barcos disponibles, false en caso contrario.
+ */
+public boolean isShipAvailable(String shipType) {
+    return model.isShipAvailable(shipType); // Llama al modelo para verificar la disponibilidad
+}
 
     /**
      * Agrega un jugador al juego.

@@ -51,14 +51,14 @@ public class StrategyModel {
      * y notifica a los observadores.
      * @param shipType Tipo de barco.
      */
-    public void placeShip(String shipType) {
-        if (shipsAvailable.containsKey(shipType) && shipsAvailable.get(shipType) > 0) {
-            shipsAvailable.put(shipType, shipsAvailable.get(shipType) - 1);
-            notifyObserver(); // Notifica cambios.
-        } else {
-            System.out.println("No hay barcos disponibles de tipo: " + shipType);
-        }
+   public void placeShip(String shipType) {
+    if (shipsAvailable.containsKey(shipType) && shipsAvailable.get(shipType) > 0) {
+        shipsAvailable.put(shipType, shipsAvailable.get(shipType) - 1);
+        notifyObserver(); // Notificar cambios
+    } else {
+        System.out.println("No quedan barcos disponibles del tipo: " + shipType);
     }
+}
 
     /**
      * Obtiene los barcos disponibles.
