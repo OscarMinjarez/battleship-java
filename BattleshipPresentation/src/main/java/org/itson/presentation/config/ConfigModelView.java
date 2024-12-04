@@ -1,7 +1,7 @@
 
 package org.itson.presentation.config;
 
-import domain.Player;
+import org.itson.domain.Player;
 import org.itson.presentation.config.ConfigModel;
 import org.itson.presentation.config.IConfigObserver;
 

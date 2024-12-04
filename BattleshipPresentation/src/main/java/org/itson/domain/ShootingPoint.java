@@ -1,4 +1,4 @@
-package domain;
+package org.itson.domain;
 
 import java.io.Serializable;
 import lombok.Data;

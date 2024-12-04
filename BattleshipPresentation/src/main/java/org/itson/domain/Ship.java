@@ -1,4 +1,4 @@
-package domain;
+package org.itson.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

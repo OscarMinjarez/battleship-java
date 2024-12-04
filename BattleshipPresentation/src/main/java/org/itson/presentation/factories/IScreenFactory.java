@@ -1,6 +1,6 @@
 package org.itson.presentation.factories;
 
-import domain.Game;
+import org.itson.domain.Game;
 
 public interface IScreenFactory {
     void showStandbyScreen();

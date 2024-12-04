@@ -1,7 +1,7 @@
 package org.itson.presentation.strategy;
 
-import domain.Game;
-import domain.Player;
+import org.itson.domain.Game;
+import org.itson.domain.Player;
 import java.util.Map;
 import lombok.Setter;
 import org.itson.presentation.contracts.IBusinessObserver;

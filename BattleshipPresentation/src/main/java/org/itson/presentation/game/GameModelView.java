@@ -1,7 +1,7 @@
 package org.itson.presentation.game;
 
-import domain.Coordiante;
-import domain.Game;
+import org.itson.domain.Coordiante;
+import org.itson.domain.Game;
 
 public class GameModelView implements IGameObserver{
 
