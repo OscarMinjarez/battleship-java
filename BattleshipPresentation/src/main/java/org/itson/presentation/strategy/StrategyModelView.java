@@ -3,14 +3,18 @@ package org.itson.presentation.strategy;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Clase que actúa como intermediaria entre la Vista y la Lógica del Negocio.
+ * Implementa el patrón MVVM para manejar la interacción usuario-sistema.
+ */
 public class StrategyModelView {
 
-    private static StrategyModelView instance;
-    private final StrategyBusiness business;
-    private final StrategyView view;
+    private static StrategyModelView instance; // Instancia única (Singleton).
+    private final StrategyBusiness business; // Referencia a la lógica de negocio.
+    private final StrategyView view; // Referencia a la vista.
 
-    private int currentShipSize = 0;
-    private boolean horizontalOrientation = true;
+    private int currentShipSize = 0; // Tamaño del barco seleccionado.
+    private boolean horizontalOrientation = true; // Orientación del barco seleccionado.
 
     private StrategyModelView() {
         business = StrategyBusiness.getInstance();
@@ -37,50 +41,42 @@ public class StrategyModelView {
 
     private void handleCustomButtonClick(String actionCommand) {
         switch (actionCommand) {
-            case "Horizontal" -> {
-                horizontalOrientation = true;
-                System.out.println("Escogiste orientacion Horizontal");
-            }
-            case "Vertical" -> {
-                horizontalOrientation = false;
-                System.out.println("Escogiste orientacion Vertical");
-            }
-            default -> {
-                currentShipSize = getShipSize(actionCommand);
-                System.out.println(actionCommand + " seleccionado con tamaño " + currentShipSize);
-            }
+            case "Horizontal" -> horizontalOrientation = true;
+            case "Vertical" -> horizontalOrientation = false;
+            default -> currentShipSize = getShipSize(actionCommand);
         }
     }
 
     private void handleGridButtonClick(int index) {
-        if (currentShipSize == 0) {
-            System.out.println("Por favor selecciona un barco.");
-            return;
-        }
-
         JButton[] buttons = view.getGridButtons();
-        if (!canPlaceShip(index, currentShipSize, horizontalOrientation, buttons)) {
-            System.out.println("No hay espacio suficiente para colocar el barco.");
+        if (currentShipSize == 0 || !canPlaceShip(index, currentShipSize, horizontalOrientation, buttons)) {
+            System.out.println("Barco no puede colocarse aquí.");
             return;
         }
-
         placeShip(index, currentShipSize, horizontalOrientation, buttons);
         business.placeShip(getShipTypeBySize(currentShipSize));
         view.updateShipsCountLabel(business.getShipsAvailable());
     }
 
     private boolean canPlaceShip(int startIndex, int shipSize, boolean horizontal, JButton[] buttons) {
-        int row = startIndex / 10;
         for (int i = 0; i < shipSize; i++) {
             int index = horizontal ? startIndex + i : startIndex + i * 10;
-            if (index >= buttons.length || buttons[index].getBackground() == Color.RED) {
-                return false;
-            }
-            if (horizontal && index / 10 != row) {
+            if (index >= buttons.length || buttons[index].getBackground() == Color.RED || isAdjacentToShip(index, buttons)) {
                 return false;
             }
         }
         return true;
+    }
+
+    private boolean isAdjacentToShip(int index, JButton[] buttons) {
+        int[] adjacentOffsets = {-1, 1, -10, 10};
+        for (int offset : adjacentOffsets) {
+            int adjacentIndex = index + offset;
+            if (adjacentIndex >= 0 && adjacentIndex < buttons.length && buttons[adjacentIndex].getBackground() == Color.RED) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void placeShip(int startIndex, int shipSize, boolean horizontal, JButton[] buttons) {
@@ -88,8 +84,6 @@ public class StrategyModelView {
             int index = horizontal ? startIndex + i : startIndex + i * 10;
             buttons[index].setBackground(Color.RED);
         }
-        System.out.println("Barco colocado en posición " + startIndex + " con orientación "
-                + (horizontal ? "Horizontal" : "Vertical"));
     }
 
     private int getShipSize(String shipType) {
