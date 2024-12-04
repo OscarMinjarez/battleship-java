@@ -97,6 +97,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldUsername">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldUsernameActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelColor">
       <Properties>
@@ -110,6 +113,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Red"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonColorRedActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonColorBlue">
       <Properties>
@@ -118,11 +124,17 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Blue"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonColorBlueActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonPlay">
       <Properties>
         <Property name="text" type="java.lang.String" value="Play"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPlayActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

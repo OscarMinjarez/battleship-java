@@ -1,7 +1,7 @@
 package org.itson.presentation.standby;
 
-import domain.Game;
-import domain.Player;
+import org.itson.domain.Game;
+import org.itson.domain.Player;
 import java.io.IOException;
 import java.util.Map;
 import lombok.Setter;

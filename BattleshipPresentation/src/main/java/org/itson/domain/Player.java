@@ -1,4 +1,4 @@
-package domain;
+package org.itson.domain;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,14 +8,21 @@ import lombok.NoArgsConstructor;
 
 
 public class Player {
-    private String name;
+     private String name;
+    private String color;
 
-    public Player(String name) {
+  
+    public Player(String name, String color) {
         this.name = name;
+        this.color = color;
     }
 
     public String getName() {
         return name;
+    }
+
+     public String getColor() {
+        return color;
     }
 
     @Override

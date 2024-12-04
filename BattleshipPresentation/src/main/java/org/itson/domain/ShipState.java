@@ -1,4 +1,4 @@
-package domain;
+package org.itson.domain;
 
 public enum ShipState {
     Sunken,

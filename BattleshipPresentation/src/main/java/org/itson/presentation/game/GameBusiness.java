@@ -1,6 +1,6 @@
 package org.itson.presentation.game;
 
-import domain.Game;
+import org.itson.domain.Game;
 import org.itson.presentation.factories.ScreenFactory;
 
 public class GameBusiness {

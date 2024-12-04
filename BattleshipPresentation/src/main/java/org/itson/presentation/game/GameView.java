@@ -2,7 +2,7 @@
 package org.itson.presentation.game;
 
 
-import domain.Coordiante;
+import org.itson.domain.Coordiante;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;

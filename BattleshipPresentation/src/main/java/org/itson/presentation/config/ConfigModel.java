@@ -1,38 +1,49 @@
 
 package org.itson.presentation.config;
 
-import domain.Player;
+import org.itson.domain.Player;
 
 /**
  *
  * @author PabloCeasxr
  */
+/**
+ * La clase ConfigModel representa el modelo de configuración del juego.
+ * Sigue el patrón Singleton para garantizar que solo exista una instancia global
+ * durante la ejecución del programa. Administra la configuración del jugador y
+ * permite su actualización, almacenamiento y verificación.
+ */
+/**
+ * Modelo que almacena y gestiona la configuración inicial del juego.
+ */
 public class ConfigModel {
 
     private Player player;
     private static ConfigModel instance;
-    private IConfigObserver iConfigObserver;
 
     private ConfigModel() {
-
-    }
-
-    public void update() {
     }
 
     public static ConfigModel getInstance() {
         if (instance == null) {
-            return instance = new ConfigModel();
+            instance = new ConfigModel();
         }
         return instance;
-
     }
 
+    /**
+     * Guarda la configuración del jugador.
+     * @param player Jugador con la configuración seleccionada.
+     */
     public void saveConfig(Player player) {
+        this.player = player;
     }
 
-    public boolean veifyConfig(Player player) {
-        return true;
+    /**
+     * Obtiene la configuración del jugador.
+     * @return Jugador con su configuración.
+     */
+    public Player getConfig() {
+        return this.player;
     }
-
 }
