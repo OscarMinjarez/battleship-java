@@ -88,7 +88,7 @@ public class StandbyView extends javax.swing.JFrame {
                         .addComponent(lblHostValue))
                     .addComponent(lblWaitingPlayer)
                     .addComponent(btnCancel))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(202, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +105,7 @@ public class StandbyView extends javax.swing.JFrame {
                     .addComponent(lblPortValue))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnCancel)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pack();

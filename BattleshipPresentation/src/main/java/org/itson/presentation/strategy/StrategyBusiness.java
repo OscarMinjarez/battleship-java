@@ -8,8 +8,8 @@ import org.itson.presentation.contracts.IBusinessObserver;
 import org.itson.presentation.contracts.IModelObserver;
 
 /**
- * Clase que gestiona la lógica del negocio del juego.
- * Coordina las interacciones entre el modelo y otras partes del sistema.
+ * Clase que gestiona la lógica del negocio del juego. Coordina las
+ * interacciones entre el modelo y otras partes del sistema.
  */
 public class StrategyBusiness implements IBusinessObserver {
 
@@ -30,6 +30,7 @@ public class StrategyBusiness implements IBusinessObserver {
 
     /**
      * Obtiene la instancia única de la clase.
+     *
      * @return Instancia única de StrategyBusiness.
      */
     public static StrategyBusiness getInstance() {
@@ -41,6 +42,7 @@ public class StrategyBusiness implements IBusinessObserver {
 
     /**
      * Devuelve los barcos disponibles desde el modelo.
+     *
      * @return Mapa con los barcos disponibles.
      */
     public Map<String, Integer> getShipsAvailable() {
@@ -49,6 +51,7 @@ public class StrategyBusiness implements IBusinessObserver {
 
     /**
      * Intenta colocar un barco de tipo específico.
+     *
      * @param shipType Tipo de barco a colocar.
      */
     public void placeShip(String shipType) {
@@ -62,15 +65,11 @@ public class StrategyBusiness implements IBusinessObserver {
 
     /**
      * Agrega un jugador al juego.
+     *
      * @param player Jugador a agregar.
      */
     public void addPlayer(Player player) {
-        if (player != null) {
-            game.addPlayer(player);
-            System.out.println("Jugador agregado: " + player.getName());
-        } else {
-            System.out.println("El jugador no puede ser nulo.");
-        }
+        System.out.println("Player added: " + player.getName() + " with color: " + player.getColor());
     }
 
     /**
@@ -84,6 +83,7 @@ public class StrategyBusiness implements IBusinessObserver {
 
     /**
      * Responde a notificaciones de otros componentes.
+     *
      * @param object Datos enviados en la notificación.
      */
     @Override

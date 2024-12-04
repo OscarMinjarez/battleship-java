@@ -1,13 +1,19 @@
 package org.itson.presentation.strategy;
 
+import org.itson.domain.Player;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 import java.util.function.Consumer;
 
+/**
+ * Vista principal del juego de estrategia.
+ */
 public class StrategyView extends JFrame implements IStrategyObserver {
 
     private static StrategyView instance;
+    private String playerColor;
+    private String playerName;
     private JPanel gridPanel;
     private JButton[] gridButtons;
     private JLabel shipsLabel;
@@ -37,7 +43,19 @@ public class StrategyView extends JFrame implements IStrategyObserver {
         add(shipsLabel, BorderLayout.PAGE_END);
     }
 
-   public void initCustomButtonRow(Consumer<String> buttonHandler) {
+   public String getPlayerColor() {
+    return this.playerColor;
+}
+
+   public void initializeGame(Player player) {
+    this.playerName = player.getName();
+    this.playerColor = player.getColor();
+
+    // Configurar el título de la ventana
+    setTitle("Battleship - Player: " + playerName + " (" + playerColor + ")");
+}
+
+    public void initCustomButtonRow(Consumer<String> buttonHandler) {
         JPanel customButtonRowPanel = new JPanel();
         customButtonRowPanel.setLayout(new BoxLayout(customButtonRowPanel, BoxLayout.Y_AXIS));
 
@@ -56,7 +74,6 @@ public class StrategyView extends JFrame implements IStrategyObserver {
         verticalButton.addActionListener(e -> buttonHandler.accept("Vertical"));
         customButtonRowPanel.add(verticalButton);
 
-        // Cambia la posición al lado izquierdo
         add(customButtonRowPanel, BorderLayout.LINE_START);
         revalidate();
         repaint();
@@ -96,7 +113,6 @@ public class StrategyView extends JFrame implements IStrategyObserver {
         labelText.append("</html>");
         shipsLabel.setText(labelText.toString());
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -5,28 +5,33 @@ import org.itson.domain.Player;
 import org.itson.presentation.config.ConfigModel;
 import org.itson.presentation.config.IConfigObserver;
 
-public class ConfigModelView implements IConfigObserver {
+import org.itson.domain.Player;
+
+/**
+ * Model-View para manejar la configuración inicial del juego.
+ * Actúa como intermediario entre FrmBattleship y ConfigModel.
+ */
+public class ConfigModelView {
 
     private static ConfigModelView instance;
     private ConfigModel configModel;
-    private FrmBattleship frmBattleship;
 
     private ConfigModelView() {
-
+        configModel = ConfigModel.getInstance();
     }
 
     public static ConfigModelView getInstance() {
-        if (ConfigModelView.instance == null) {
-            ConfigModelView.instance = new ConfigModelView();
+        if (instance == null) {
+            instance = new ConfigModelView();
         }
-        return ConfigModelView.instance;
+        return instance;
     }
 
-    @Override
-    public void update() {
-    }
-
+    /**
+     * Guarda la configuración del jugador en el modelo.
+     * @param player Jugador con la configuración seleccionada.
+     */
     public void saveConfig(Player player) {
-        this.configModel.saveConfig(player);
+        configModel.saveConfig(player);
     }
 }
