@@ -1,12 +1,11 @@
 package org.itson.presentation.game;
 
-
 public class GameModel {
 
     private static GameModel instance;
     private IGameObserver gameOberver;
     private GameBusiness gameBusiness;
-    
+
     private GameModel() {
         this.gameBusiness = GameBusiness.getInstance();
         this.gameBusiness.setModel(this);
@@ -27,8 +26,9 @@ public class GameModel {
     public void shoot(int index) {
         this.gameBusiness.shoot(index);
     }
+
     public void setGameObserver(IGameObserver gameObserver) {
         this.gameOberver = gameObserver;
     }
-    
+
 }

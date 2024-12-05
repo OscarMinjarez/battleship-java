@@ -10,6 +10,9 @@ public class Game {
 
     public Game() {
         this.players = new Player[2];
+        
+        this.players[0] = new Player();
+        this.players[1] = new Player();
     }
 
     /**

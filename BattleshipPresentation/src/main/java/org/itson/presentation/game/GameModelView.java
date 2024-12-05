@@ -8,6 +8,7 @@ public class GameModelView implements IGameObserver{
 
     private GameModelView() {
         this.gameView = GameView.getInstance();
+        this.gameView.setGameModelView(this);
         this.gameModel = GameModel.getInstance();
         this.gameModel.setGameObserver(this);
     }

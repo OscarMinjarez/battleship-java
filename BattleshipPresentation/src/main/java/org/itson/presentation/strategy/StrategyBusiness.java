@@ -1,9 +1,9 @@
 package org.itson.presentation.strategy;
 
-import org.itson.domain.Game;
 import org.itson.domain.Player;
 import java.util.Map;
 import lombok.Setter;
+import org.itson.domain.Table;
 import org.itson.presentation.contracts.IBusinessObserver;
 import org.itson.presentation.contracts.IModelObserver;
 
@@ -13,19 +13,21 @@ import org.itson.presentation.contracts.IModelObserver;
  */
 public class StrategyBusiness implements IBusinessObserver {
 
-    private static StrategyBusiness instance; // Instancia única (Singleton).
-    private final StrategyModel model; // Referencia al modelo de datos.
-    private final Game game; // Objeto que maneja la lógica del juego.
+    private static StrategyBusiness instance;
+    private final StrategyModel model;
+    private Player player;
+    private Table table;
 
     @Setter
-    private IModelObserver modelObserver; // Observador para notificar cambios.
+    private IModelObserver modelObserver;
 
     /**
      * Constructor privado que inicializa el modelo y el juego.
      */
     private StrategyBusiness() {
         this.model = StrategyModel.getInstance();
-        this.game = new Game();
+        this.player = new Player();
+        this.table = new Table();
     }
 
     /**
@@ -55,22 +57,23 @@ public class StrategyBusiness implements IBusinessObserver {
      * @param shipType Tipo de barco a colocar.
      */
     public void placeShip(String shipType) {
-    if (model.isShipAvailable(shipType)) {
-        model.placeShip(shipType); // Reducir el contador de barcos disponibles
-        notifyModelUpdate(); // Notificar a la vista
-    } else {
-        System.out.println("No quedan barcos disponibles de este tipo: " + shipType);
+        if (model.isShipAvailable(shipType)) {
+            model.placeShip(shipType);
+            notifyModelUpdate();
+        } else {
+            System.out.println("No quedan barcos disponibles de este tipo: " + shipType);
+        }
     }
-}
-/**
- * Verifica si hay barcos disponibles de un tipo específico.
- *
- * @param shipType Tipo de barco.
- * @return true si hay barcos disponibles, false en caso contrario.
- */
-public boolean isShipAvailable(String shipType) {
-    return model.isShipAvailable(shipType); // Llama al modelo para verificar la disponibilidad
-}
+
+    /**
+     * Verifica si hay barcos disponibles de un tipo específico.
+     *
+     * @param shipType Tipo de barco.
+     * @return true si hay barcos disponibles, false en caso contrario.
+     */
+    public boolean isShipAvailable(String shipType) {
+        return model.isShipAvailable(shipType);
+    }
 
     /**
      * Agrega un jugador al juego.
@@ -78,7 +81,7 @@ public boolean isShipAvailable(String shipType) {
      * @param player Jugador a agregar.
      */
     public void addPlayer(Player player) {
-      //  System.out.println("Player added: " + player.getName() + " with color: " + player.getColor());
+        //  System.out.println("Player added: " + player.getName() + " with color: " + player.getColor());
     }
 
     /**
