@@ -3,7 +3,6 @@ package org.itson.presentation.strategy;
 import org.itson.domain.Player;
 import java.util.Map;
 import lombok.Setter;
-import org.itson.domain.Table;
 import org.itson.presentation.contracts.IBusinessObserver;
 import org.itson.presentation.contracts.IModelObserver;
 
@@ -15,8 +14,6 @@ public class StrategyBusiness implements IBusinessObserver {
 
     private static StrategyBusiness instance;
     private final StrategyModel model;
-    private Player player;
-    private Table table;
 
     @Setter
     private IModelObserver modelObserver;
@@ -26,8 +23,6 @@ public class StrategyBusiness implements IBusinessObserver {
      */
     private StrategyBusiness() {
         this.model = StrategyModel.getInstance();
-        this.player = new Player();
-        this.table = new Table();
     }
 
     /**
