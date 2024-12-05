@@ -1,6 +1,5 @@
 package org.itson.presentation.factories;
 
-import org.itson.domain.Game;
 import org.itson.presentation.game.GameModelView;
 import org.itson.presentation.standby.StandbyViewModel;
 
@@ -41,12 +40,10 @@ public class ScreenFactory implements IScreenFactory {
     /**
      * Muestra la pantalla de juego utilizando el modelo de vista correspondiente.
      * 
-     * @param game Instancia del juego que se mostrará en la pantalla.
      */
     @Override
-    public void showGameScreen(Game game) {
+    public void showGameScreen() {
         GameModelView gameModelView = GameModelView.getInstance();
-        gameModelView.setGame(game);
         gameModelView.showGameScreen();
     }
 }

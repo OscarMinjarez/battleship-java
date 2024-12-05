@@ -1,6 +1,7 @@
 package org.itson.presentation.config;
 
 import javax.swing.JOptionPane;
+import org.itson.domain.Color;
 import org.itson.presentation.strategy.StrategyModelView;
 import org.itson.domain.Player;
 
@@ -41,7 +42,8 @@ public class FrmBattleship extends javax.swing.JFrame {
         }
 
         // Crear un nuevo jugador y pasar los datos al modelo de juego.
-        Player player = new Player(username, selectedColor);
+        Player player = new Player();
+        player.getColors().setFake(Color.Blue);
 
         // Cambiar a la pantalla de juego.
         this.setVisible(false); // Ocultar la pantalla de configuración.
@@ -177,8 +179,8 @@ public class FrmBattleship extends javax.swing.JFrame {
         }
 
         // Crear un nuevo jugador con el nombre y el color seleccionado.
-        Player player = new Player(username, selectedColor);
-
+        Player player = new Player();
+        player.getColors().setFake(Color.Blue);
         // Pasar los datos del jugador al modelo y cambiar a la pantalla del juego.
         this.setVisible(false); // Ocultar la pantalla de configuración.
         StrategyModelView.getInstance().startGame(player); // Iniciar el juego con los datos configurados.

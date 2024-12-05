@@ -2,12 +2,9 @@
 package org.itson.presentation.game;
 
 
-import org.itson.domain.Coordiante;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -45,8 +42,7 @@ public class GameView extends javax.swing.JFrame {
     }
     
     public void clickShoot() {
-        // Implementación del disparo
-        GameModelView.getInstance().shoot(new Coordiante());
+        
     }
 
     /**

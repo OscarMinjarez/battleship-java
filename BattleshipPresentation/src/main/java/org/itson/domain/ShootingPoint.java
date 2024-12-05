@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 public class ShootingPoint implements Serializable {
 
     private boolean impact;
-    private Coordiante coordiante;
+    private Coordinate coordiante;
+    private boolean containsShip;
 }

@@ -78,7 +78,7 @@ public boolean isShipAvailable(String shipType) {
      * @param player Jugador a agregar.
      */
     public void addPlayer(Player player) {
-        System.out.println("Player added: " + player.getName() + " with color: " + player.getColor());
+      //  System.out.println("Player added: " + player.getName() + " with color: " + player.getColor());
     }
 
     /**

@@ -49,7 +49,7 @@ public class StrategyView extends JFrame implements IStrategyObserver {
 
    public void initializeGame(Player player) {
     this.playerName = player.getName();
-    this.playerColor = player.getColor();
+    //this.playerColor = player.getColor();
 
     // Configurar el título de la ventana
     setTitle("Battleship - Player: " + playerName + " (" + playerColor + ")");

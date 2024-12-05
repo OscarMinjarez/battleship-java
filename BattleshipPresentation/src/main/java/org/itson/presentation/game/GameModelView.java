@@ -1,8 +1,5 @@
 package org.itson.presentation.game;
 
-import org.itson.domain.Coordiante;
-import org.itson.domain.Game;
-
 public class GameModelView implements IGameObserver{
 
     private static GameModelView instance;
@@ -27,7 +24,7 @@ public class GameModelView implements IGameObserver{
         this.gameView.showGameScreen();
     }
 
-    public void shoot(Coordiante point) {
+    public void shoot(int point) {
         this.gameModel.shoot(point);
     }
     
@@ -35,11 +32,5 @@ public class GameModelView implements IGameObserver{
         this.gameView.showGameScreen();
     }
     
-    public void setGame(Game game) {
-        this.gameModel.setGame(game);
-    }
-    
-    public void setActualCoordinate(int actualCoordinate){
-        this.gameModel.setActualCoordinate(actualCoordinate);
-    }
+
 }

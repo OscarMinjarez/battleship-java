@@ -1,21 +1,15 @@
 package org.itson.presentation.game;
 
-import org.itson.domain.Coordiante;
-import org.itson.domain.Game;
-import org.itson.domain.Table;
 
-/**
- *
- * @author PabloCeasxr
- */
 public class GameModel {
 
     private static GameModel instance;
-    private Game game;
     private IGameObserver gameOberver;
-    private int actualCoordinate;
+    private GameBusiness gameBusiness;
+    
     private GameModel() {
-
+        this.gameBusiness = GameBusiness.getInstance();
+        this.gameBusiness.setModel(this);
     }
 
     public void update() {
@@ -30,20 +24,11 @@ public class GameModel {
 
     }
 
-    public void shoot(Coordiante point) {
-        // actualizar el tablero y el history 
-        System.out.println("shoot to coordinate: "+actualCoordinate);
+    public void shoot(int index) {
+        this.gameBusiness.shoot(index);
     }
-
     public void setGameObserver(IGameObserver gameObserver) {
         this.gameOberver = gameObserver;
     }
     
-    public void setGame(Game game) {
-        this.game = game;
-    }
-    
-    public void setActualCoordinate(int actualCoordinate){
-        this.actualCoordinate=actualCoordinate;
-    } 
 }

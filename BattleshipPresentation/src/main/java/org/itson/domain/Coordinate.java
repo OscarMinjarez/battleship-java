@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Coordiante implements Serializable {
+public class Coordinate implements Serializable {
 
     private int x;
     private int y;

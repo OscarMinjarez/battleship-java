@@ -4,8 +4,8 @@
  */
 package org.itson.presentation.game;
 
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
+import javax.swing.JToggleButton;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,21 +17,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GridButton extends JButton {
+@AllArgsConstructor
+public class GridButton extends  JToggleButton{
 
     private int position;
 
-    public GridButton(int position) {
-        this.position = position;
-        configureButton();
 
-    }
 
-    private void configureButton() {
-        this.addActionListener((ActionEvent e) -> {
-            // Enviamos la posición seleccionada en el grid
-            GameModelView.getInstance().setActualCoordinate(getPosition());
-        });
-    }
 
 }
