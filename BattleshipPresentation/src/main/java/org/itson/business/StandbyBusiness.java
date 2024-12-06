@@ -1,4 +1,4 @@
-package org.itson.presentation.standby;
+package org.itson.business;
 
 import org.itson.domain.Game;
 import org.itson.domain.Player;

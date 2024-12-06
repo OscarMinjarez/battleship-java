@@ -1,8 +1,9 @@
-package org.itson.presentation.game;
+package org.itson.business;
 
 import lombok.Setter;
 import org.itson.domain.Game;
 import org.itson.presentation.factories.ScreenFactory;
+import org.itson.presentation.game.GameModel;
 
 public class GameBusiness {
     
