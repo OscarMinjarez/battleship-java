@@ -32,5 +32,4 @@ public class GameModel {
     public void setGameObserver(IGameObserver gameObserver) {
         this.gameOberver = gameObserver;
     }
-
 }

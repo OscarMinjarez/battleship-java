@@ -14,5 +14,6 @@ public class Player implements Serializable{
     
     public Player() {
         this.table = new Table();
+        this.colors = new PlayerColor();
     }
 }
