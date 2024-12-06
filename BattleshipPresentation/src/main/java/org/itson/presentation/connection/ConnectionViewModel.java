@@ -29,6 +29,9 @@ public class ConnectionViewModel implements IConnectionObserver {
 
     @Override
     public void update(Object object) {
-        this.connectionView.update(object);
+        if (object != null) {
+            System.out.println(object);
+            this.connectionView.update(object);
+        }
     }
 }

@@ -96,7 +96,6 @@ public class BattleshipPeerNode implements IServerObserver {
             this.businessObserver.notify(new BattleshipPeerMessage(data));
         } catch (IOException e) {
             System.out.println(e.getMessage());
-
             Map<String, Object> errorData = new HashMap<>();
             errorData.put("status", "error");
             errorData.put("message", e.getMessage());
