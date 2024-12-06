@@ -1,5 +1,6 @@
 package org.itson.presentation.strategy;
 
+import org.itson.business.StrategyBusiness;
 import javax.swing.*;
 import java.awt.*;
 import org.itson.domain.Player;

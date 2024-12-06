@@ -1,4 +1,4 @@
-package org.itson.presentation.connection;
+package org.itson.business;
 
 import java.util.Map;
 import lombok.Setter;

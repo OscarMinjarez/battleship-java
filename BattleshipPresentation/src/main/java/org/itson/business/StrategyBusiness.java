@@ -1,10 +1,11 @@
-package org.itson.presentation.strategy;
+package org.itson.business;
 
 import org.itson.domain.Player;
 import java.util.Map;
 import lombok.Setter;
 import org.itson.presentation.contracts.IBusinessObserver;
 import org.itson.presentation.contracts.IModelObserver;
+import org.itson.presentation.strategy.StrategyModel;
 
 /**
  * Clase que gestiona la lógica del negocio del juego. Coordina las

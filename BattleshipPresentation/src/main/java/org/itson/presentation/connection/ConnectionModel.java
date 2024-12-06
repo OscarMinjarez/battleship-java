@@ -1,5 +1,6 @@
 package org.itson.presentation.connection;
 
+import org.itson.business.ConnectionBusiness;
 import java.util.HashMap;
 import java.util.Map;
 import org.itson.peertopeer.model.BattleshipPeerMessage;

@@ -1,5 +1,7 @@
 package org.itson.presentation.game;
 
+import org.itson.business.GameBusiness;
+
 public class GameModel {
 
     private static GameModel instance;
