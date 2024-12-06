@@ -1,13 +1,18 @@
 package org.itson.domain;
 
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
+@AllArgsConstructor
 public class ShootingPoint implements Serializable {
 
     private boolean impact;
-    private Coordiante coordiante;
+    private Coordinate coordiante;
+    private boolean containsShip;
+    
+    public ShootingPoint() {
+        this.coordiante = new Coordinate(3, 3);
+    }
 }

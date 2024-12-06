@@ -1,39 +1,42 @@
 package org.itson.domain;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class Game {
 
-    private final List<Player> players;
+    @Getter
+    private final Player[] players;
+    private Player turn;
 
     public Game() {
-        this.players = new ArrayList<>();
+        this.players = new Player[2];
+        
+        this.players[0] = new Player();
+        this.players[1] = new Player();
     }
 
     /**
      * Agrega un jugador al juego.
      *
-     * @param player El jugador a agregar.
+     * @param index
+     * @return 
      */
+    public boolean shoot(int index) {
+        for (Player player : this.players) {
+            if (!player.equals(this.turn)) {
+                return player.getTable().shoot(index);
+            }
+        }
+        return false;
+    }
+
     public void addPlayer(Player player) {
-        if (player != null) {
-            players.add(player);
-            System.out.println("Jugador añadido: " + player.getName());
-        } else {
-            System.out.println("No se puede añadir un jugador nulo.");
+        for (int i = 0; i < this.players.length; i++) {
+            if (this.players[i] == null) {
+                this.players[i] = player;
+                break;
+            }
         }
     }
 
-    public List<Player> getPlayers() {
-        return players;
-    }
 }

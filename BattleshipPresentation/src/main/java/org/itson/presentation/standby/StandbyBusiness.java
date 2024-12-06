@@ -43,7 +43,7 @@ public class StandbyBusiness implements IBusinessObserver {
     }
     
     public void showGameScreen() {
-        ScreenFactory.getInstance().showGameScreen(this.game);
+        ScreenFactory.getInstance().showGameScreen();
     }
     
     public void runServer() {

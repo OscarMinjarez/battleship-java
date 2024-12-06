@@ -2,13 +2,13 @@
 package org.itson.presentation.game;
 
 
-import org.itson.domain.Coordiante;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import javax.swing.JButton;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+import lombok.Setter;
 
 /**
  *
@@ -17,16 +17,18 @@ import javax.swing.JPanel;
 public class GameView extends javax.swing.JFrame {
     
     private static GameView instance;
-    private GameModelView gameModelView;
     private JPanel gridPanel;
 
+    @Setter private GameModelView gameModelView;
+    @Setter private int selectedIndex;
+    
     /**
      * Creates new form GameView
      */
     private GameView() {
         initComponents();
-        initGridPanel(); // Inicializa el panel de la cuadrícula
-        setLocationRelativeTo(null); // Centra la ventana
+        initGridPanel();
+        setLocationRelativeTo(null);
     }
     
     public static GameView getInstance() {
@@ -45,36 +47,28 @@ public class GameView extends javax.swing.JFrame {
     }
     
     public void clickShoot() {
-        // Implementación del disparo
-        GameModelView.getInstance().shoot(new Coordiante());
+        this.gameModelView.shoot(this.selectedIndex);
     }
 
     /**
      * Initializes the grid panel and adds it to pnlYourShips.
      */
     private void initGridPanel() {
-        createPanels(pnlEnemyShips);
-        createPanels(pnlYourShips);
+        createPanels(pnlEnemyShips, "enemy");
+        createPanels(pnlYourShips, "own");
     }
 
-    public void createPanels(JPanel pnlShips){
-        // Crear el panel de la cuadrícula
+    public void createPanels(JPanel pnlShips, String who){
         gridPanel = new JPanel();
-        gridPanel.setLayout(new GridLayout(10, 10)); // Configurar como 10x10
-        gridPanel.setPreferredSize(new Dimension(300, 300)); // Dimensiones del panel
-
-        // Añadir botones al panel de la cuadrícula
+        gridPanel.setLayout(new GridLayout(10, 10));
+        gridPanel.setPreferredSize(new Dimension(300, 300));
         for (int i = 0; i < 100; i++) {
-            // crear custom button para obtener la posicion a través de un evento
-            GridButton button = new GridButton(i);
+            GridButton button = new GridButton(i, this, who);
             gridPanel.add(button);
-            
         }
-
-        // Agregar la cuadrícula al panel pnlYourShips
         pnlShips.setLayout(new BorderLayout());
         pnlShips.add(gridPanel, BorderLayout.CENTER);
-        pnlShips.revalidate(); // Asegura que el panel se actualice correctamente
+        pnlShips.revalidate();
         pnlShips.repaint();
     }
     

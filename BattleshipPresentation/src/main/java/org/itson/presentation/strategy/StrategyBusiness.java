@@ -1,6 +1,5 @@
 package org.itson.presentation.strategy;
 
-import org.itson.domain.Game;
 import org.itson.domain.Player;
 import java.util.Map;
 import lombok.Setter;
@@ -13,19 +12,17 @@ import org.itson.presentation.contracts.IModelObserver;
  */
 public class StrategyBusiness implements IBusinessObserver {
 
-    private static StrategyBusiness instance; // Instancia única (Singleton).
-    private final StrategyModel model; // Referencia al modelo de datos.
-    private final Game game; // Objeto que maneja la lógica del juego.
+    private static StrategyBusiness instance;
+    private final StrategyModel model;
 
     @Setter
-    private IModelObserver modelObserver; // Observador para notificar cambios.
+    private IModelObserver modelObserver;
 
     /**
      * Constructor privado que inicializa el modelo y el juego.
      */
     private StrategyBusiness() {
         this.model = StrategyModel.getInstance();
-        this.game = new Game();
     }
 
     /**
@@ -57,10 +54,20 @@ public class StrategyBusiness implements IBusinessObserver {
     public void placeShip(String shipType) {
         if (model.isShipAvailable(shipType)) {
             model.placeShip(shipType);
-            notifyModelUpdate(); // Notifica a la vista.
+            notifyModelUpdate();
         } else {
-            System.out.println("No hay barcos disponibles de este tipo.");
+            System.out.println("No quedan barcos disponibles de este tipo: " + shipType);
         }
+    }
+
+    /**
+     * Verifica si hay barcos disponibles de un tipo específico.
+     *
+     * @param shipType Tipo de barco.
+     * @return true si hay barcos disponibles, false en caso contrario.
+     */
+    public boolean isShipAvailable(String shipType) {
+        return model.isShipAvailable(shipType);
     }
 
     /**
@@ -69,7 +76,7 @@ public class StrategyBusiness implements IBusinessObserver {
      * @param player Jugador a agregar.
      */
     public void addPlayer(Player player) {
-        System.out.println("Player added: " + player.getName() + " with color: " + player.getColor());
+        //  System.out.println("Player added: " + player.getName() + " with color: " + player.getColor());
     }
 
     /**

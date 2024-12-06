@@ -73,14 +73,22 @@ public class StrategyModelView {
         }
     }
 
-   private void handleGridButtonClick(int index) {
+  private void handleGridButtonClick(int index) {
     if (currentShipSize == 0) {
         System.out.println("Por favor selecciona un barco.");
         return;
     }
 
+    String shipType = getShipTypeBySize(currentShipSize);
+
+    // Verificar si hay barcos disponibles antes de proceder
+    if (!business.isShipAvailable(shipType)) {
+        System.out.println("No quedan barcos disponibles del tipo seleccionado: " + shipType);
+        return;
+    }
+
     JButton[] buttons = view.getGridButtons();
-    String playerColor = view.getPlayerColor(); // Obtener el color del jugador.
+    String playerColor = view.getPlayerColor();
 
     if (!canPlaceShip(index, currentShipSize, horizontalOrientation, buttons, playerColor)) {
         System.out.println("No hay espacio suficiente para colocar el barco o está muy cerca de otro.");
@@ -88,8 +96,8 @@ public class StrategyModelView {
     }
 
     placeShip(index, currentShipSize, horizontalOrientation, buttons, playerColor);
-    business.placeShip(getShipTypeBySize(currentShipSize));
-    view.updateShipsCountLabel(business.getShipsAvailable());
+    business.placeShip(shipType); // Actualizar modelo
+    view.updateShipsCountLabel(business.getShipsAvailable()); // Actualizar vista
 }
 
 

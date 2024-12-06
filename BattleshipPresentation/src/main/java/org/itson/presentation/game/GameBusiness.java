@@ -1,16 +1,17 @@
 package org.itson.presentation.game;
 
+import lombok.Setter;
 import org.itson.domain.Game;
 import org.itson.presentation.factories.ScreenFactory;
 
 public class GameBusiness {
     
     private static GameBusiness instance;
-    private GameModel gameModel;
+    @Setter private GameModel model;
     private Game game;
     
     private GameBusiness() {
-        this.gameModel = GameModel.getInstance();
+        this.game = new Game();
     }
     
     public static GameBusiness getInstance() {
@@ -19,15 +20,23 @@ public class GameBusiness {
         }
         return GameBusiness.instance;
     }
-    
+
     public void setGame(Game game) {
         this.game = game;
     }
-    
+
     public void showGameScreen() {
-        ScreenFactory.getInstance().showGameScreen(this.game);
+        ScreenFactory.getInstance().showGameScreen();
     }
-    
+
+    public boolean shoot(int index) {
+        boolean shooting = this.game.shoot(index);
+        if (shooting) {
+            System.out.println("Si jala");
+        }
+        return shooting;
+    }
+
     public static void main(String[] args) {
         GameBusiness gameBusiness = GameBusiness.getInstance();
         gameBusiness.showGameScreen();
