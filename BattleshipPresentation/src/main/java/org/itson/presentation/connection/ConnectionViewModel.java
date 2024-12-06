@@ -29,9 +29,6 @@ public class ConnectionViewModel implements IConnectionObserver {
 
     @Override
     public void update(Object object) {
-        // Aquí actualizas la vista dependiendo de la notificación
-        if (object instanceof Object) {
-            connectionView.update(object);
-        }
+        this.connectionView.update(object);
     }
 }
