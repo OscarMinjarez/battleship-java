@@ -9,10 +9,10 @@ public interface IScreenFactory {
      * Muestra la pantalla de espera.
      */
     void showStandbyScreen();
-
     /**
      * Muestra la pantalla de juego con la información de un juego específico.
      * 
      */
     void showGameScreen();
+    void showConnectionScreen();
 }
